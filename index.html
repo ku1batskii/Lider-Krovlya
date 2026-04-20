@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ТЗ + КП — Лидер Кровля</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0f1c;
+  --ink-2: #1a2235;
+  --graphite: #4a5568;
+  --mute: #6b7280;
+  --hair: #e5e7eb;
+  --paper: #ffffff;
+  --snow: #fafbfc;
+  --cream: #f5f6f8;
+  --accent: #2563eb;
+  --accent-dark: #1d4ed8;
+  --accent-soft: #eff6ff;
+  --signal: #10b981;
+  --signal-soft: #ecfdf5;
+  --warning: #f59e0b;
+  --warning-soft: #fffbeb;
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Inter Tight', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--snow);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ── */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ── Doc Header ── */
+.doc-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 24px;
+  padding: 40px 0 32px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 40px;
+}
+
+.doc-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.brand-mark {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.brand-mark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
+}
+.brand-mark::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 8px; height: 8px;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.doc-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.doc-subtitle {
+  font-size: 15px;
+  color: var(--graphite);
+  margin-top: 6px;
+}
+
+.doc-meta {
+  text-align: right;
+}
+
+.meta-row {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--mute);
+  line-height: 1.8;
+}
+
+.meta-row strong {
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+/* ── Status Bar ── */
+.status-bar {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 16px 20px;
+  background: var(--ink);
+  border-radius: 10px;
+  margin-bottom: 48px;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.status-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.status-value {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.status-value.accent { color: #60a5fa; }
+.status-value.signal { color: #34d399; }
+
+/* ── Section ── */
+.section {
+  margin-bottom: 56px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.section-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+/* ── Context block ── */
+.context-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.context-card {
+  padding: 18px 20px;
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  background: var(--paper);
+}
+
+.context-card-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--mute);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.context-card-text {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.context-card.highlight {
+  background: var(--accent-soft);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+.context-card.highlight .context-card-text {
+  color: var(--accent-dark);
+  font-weight: 500;
+}
+
+/* ── Package cards ── */
+.packages {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.pkg {
+  border: 1px solid var(--hair);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.pkg.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.pkg-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  background: var(--cream);
+  cursor: pointer;
+  user-select: none;
+}
+
+.pkg.featured .pkg-header {
+  background: var(--ink);
+}
+
+.pkg-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--mute);
+  letter-spacing: 0.04em;
+}
+
+.pkg.featured .pkg-num { color: rgba(255,255,255,0.4); }
+
+.pkg-name-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pkg-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--mute);
+}
+
+.pkg.featured .pkg-tag { color: rgba(255,255,255,0.5); }
+
+.pkg-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.pkg.featured .pkg-name { color: #fff; }
+
+.pkg-price-wrap {
+  text-align: right;
+}
+
+.pkg-price {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.pkg.featured .pkg-price { color: #fff; }
+
+.pkg-deadline {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--mute);
+  letter-spacing: 0.03em;
+  margin-top: 2px;
+}
+
+.pkg.featured .pkg-deadline { color: rgba(255,255,255,0.45); }
+
+.pkg-body {
+  padding: 20px 22px 22px;
+}
+
+.pkg-desc {
+  font-size: 13.5px;
+  color: var(--graphite);
+  margin-bottom: 18px;
+  line-height: 1.55;
+  max-width: 620px;
+}
+
+.deliverables {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.deliverable {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--snow);
+  border: 1px solid var(--hair);
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+
+.deliverable-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.deliverable-icon svg {
+  width: 10px; height: 10px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pkg-not-included {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--cream);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--mute);
+}
+
+.pkg-not-included strong {
+  color: var(--graphite);
+  font-weight: 500;
+}
+
+.pkg-included-from {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--signal-soft);
+  border-radius: 8px;
+  font-size: 12px;
+  color: #059669;
+}
+
+.pkg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.badge-recommended {
+  background: var(--accent);
+  color: #fff;
+  margin-left: 10px;
+}
+
+/* ── Smeta table ── */
+.smeta {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.smeta th {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mute);
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--cream);
+  border-bottom: 1px solid var(--hair);
+}
+
+.smeta th:last-child, .smeta td:last-child { text-align: right; }
+
+.smeta td {
+  padding: 11px 16px;
+  font-size: 13px;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--hair);
+  vertical-align: top;
+}
+
+.smeta tr:last-child td { border-bottom: none; }
+
+.smeta tr.group-row td {
+  background: var(--snow);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mute);
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--hair);
+}
+
+.smeta tr.total-row td {
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 16px;
+}
+
+.smeta tr.subtotal-row td {
+  background: var(--accent-soft);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--accent-dark);
+}
+
+.price-cell {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.price-note {
+  font-size: 11.5px;
+  color: var(--mute);
+  margin-top: 2px;
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+/* ── Addons ── */
+.addons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.addon {
+  padding: 16px 18px;
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  background: var(--paper);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.addon-name {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.addon-desc {
+  font-size: 12.5px;
+  color: var(--graphite);
+  line-height: 1.5;
+}
+
+.addon-price {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.addon-price-note {
+  font-size: 10.5px;
+  color: var(--mute);
+  text-align: right;
+  margin-top: 2px;
+  font-family: var(--font-body);
+}
+
+/* ── Terms ── */
+.terms-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.term-block {
+  padding: 18px 20px;
+  border: 1px solid var(--hair);
+  border-radius: 10px;
+  background: var(--paper);
+}
+
+.term-block-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.term-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.term-list li {
+  font-size: 12.5px;
+  color: var(--graphite);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.term-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* ── Client provides ── */
+.provides-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.provide-item {
+  padding: 12px 14px;
+  border: 1px solid var(--hair);
+  border-radius: 8px;
+  background: var(--paper);
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.provide-dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-top: 5px;
+}
+
+/* ── CTA block ── */
+.cta-block {
+  background: var(--ink);
+  border-radius: 14px;
+  padding: 32px 36px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-block::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -60px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cta-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.cta-sub {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+  position: relative;
+}
+
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cta-btn-primary {
+  background: #fff;
+  color: var(--ink);
+}
+
+.cta-btn-secondary {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* ── Doc footer ── */
+.doc-footer {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hair);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.doc-footer-brand {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--mute);
+  letter-spacing: 0.02em;
+}
+
+.doc-footer-note {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--mute);
+  letter-spacing: 0.02em;
+}
+
+/* ── Openness chip ── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+.chip-green { background: var(--signal-soft); color: #059669; }
+.chip-blue  { background: var(--accent-soft); color: var(--accent); }
+.chip-amber { background: var(--warning-soft); color: #b45309; }
+
+/* ── Alert ── */
+.alert {
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.55;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.alert-blue {
+  background: var(--accent-soft);
+  border: 1px solid rgba(37,99,235,0.2);
+  color: var(--accent-dark);
+}
+
+.alert-icon {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-top: 1px;
+}
+
+/* ── Print ── */
+@media print {
+  body { background: #fff; }
+  .page { max-width: 100%; padding: 0 32px 40px; }
+  .pkg { break-inside: avoid; }
+}
+
+@media (max-width: 680px) {
+  .context-grid, .terms-grid, .addons-grid { grid-template-columns: 1fr; }
+  .deliverables { grid-template-columns: 1fr; }
+  .provides-list { grid-template-columns: 1fr 1fr; }
+  .cta-block { grid-template-columns: 1fr; }
+  .doc-header { grid-template-columns: 1fr; }
+  .doc-meta { text-align: left; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── DOC HEADER ── -->
+  <header class="doc-header">
+    <div>
+      <div class="doc-brand">
+        <div class="brand-mark"></div>
+        KULBATSKII OS
+      </div>
+      <div class="doc-title">Техническое задание<br>и коммерческое предложение</div>
+      <div class="doc-subtitle">Новый сайт — Лидер Кровля</div>
+    </div>
+    <div class="doc-meta">
+      <div class="meta-row"><strong>Клиент</strong> · Лидер Кровля</div>
+      <div class="meta-row"><strong>Документ</strong> · TZ-2026-001</div>
+      <div class="meta-row"><strong>Дата</strong> · 20.04.2026</div>
+      <div class="meta-row"><strong>Версия</strong> · v1.0</div>
+      <div class="meta-row"><strong>SOP</strong> · v1.2</div>
+    </div>
+  </header>
+
+  <!-- ── STATUS BAR ── -->
+  <div class="status-bar">
+    <div class="status-item">
+      <span class="status-label">Этап</span>
+      <span class="status-value accent">ТЗ согласовано</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Discovery</span>
+      <span class="status-value signal">Завершён</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Пакеты</span>
+      <span class="status-value">3 варианта</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Срок запуска</span>
+      <span class="status-value">от 4 недель</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Стоимость от</span>
+      <span class="status-value">₽80 000</span>
+    </div>
+  </div>
+
+  <!-- ── SECTION 01: КОНТЕКСТ ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Контекст проекта</h2>
+    </div>
+
+    <div class="alert alert-blue">
+      <span class="alert-icon">i</span>
+      <span>Документ подготовлен по результатам discovery-анализа и заполненного опросника. Стратегическая задача нового сайта — перейти от дилерской витрины одного бренда к позиции <strong>первого мультибрендового выбора в северо-западном Подмосковье.</strong></span>
+    </div>
+
+    <div class="context-grid">
+      <div class="context-card">
+        <div class="context-card-label">Текущая ситуация</div>
+        <div class="context-card-text">Сайт позиционирован как «официальный дилер Металл Профиль». 0% лидов с сайта — 70% продаж через партнёров/подрядчиков. Нет цен в карточках, нет калькуляторов, нет B2B-раздела.</div>
+      </div>
+      <div class="context-card">
+        <div class="context-card-label">Что нужно построить</div>
+        <div class="context-card-text">Мультибрендовый региональный интернет-магазин с открытыми ценами, гео-страницами под 5 направлений и выделенной механикой для подрядчиков. Ориентир — krovelnii.ru.</div>
+      </div>
+      <div class="context-card">
+        <div class="context-card-label">Целевая аудитория</div>
+        <div class="context-card-text">Подрядчики и строительные бригады (70% выручки) — ценят скорость, прайс и наличие. Частные клиенты (B2C) — нуждаются в помощи с выбором материала.</div>
+      </div>
+      <div class="context-card highlight">
+        <div class="context-card-label">Главное конкурентное преимущество</div>
+        <div class="context-card-text">Доставка 1–2 дня по 5 направлениям СЗ Подмосковья. Ни один федеральный игрок не закрывает этот гео-спрос на уровне конкретных шоссе и посёлков.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 02: ПАКЕТЫ ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Пакеты услуг</h2>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--graphite);margin-bottom:24px;line-height:1.6;max-width:660px;">
+      Каждый пакет — завершённый продукт, не черновик. Пакет 02 включает всё из Пакета 01, Пакет 03 — всё из Пакета 02. Выбираете уровень готовности на старт — начинаем оттуда.
+    </p>
+
+    <div class="packages">
+
+      <!-- PKG 01 -->
+      <div class="pkg">
+        <div class="pkg-header">
+          <span class="pkg-num">PKG-01</span>
+          <div class="pkg-name-wrap">
+            <span class="pkg-tag">СТАРТ · MVP</span>
+            <span class="pkg-name">Мультибрендовая витрина</span>
+          </div>
+          <div class="pkg-price-wrap">
+            <div class="pkg-price">₽80 000</div>
+            <div class="pkg-deadline">Срок — 4 недели</div>
+          </div>
+        </div>
+        <div class="pkg-body">
+          <p class="pkg-desc">Запуск под дедлайн клиента. Полноценный сайт с каталогом трёх брендов, открытыми ценами и отдельным разделом для подрядчиков. Закрывает задачу «красивый сайт с разделами товаров» и устанавливает мультибрендовое позиционирование.</p>
+          <div class="deliverables">
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Главная страница — мультибрендовое позиционирование, УТП, гео-охват, блок доверия</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Каталог: Металл Профиль, Деке, Технониколь — карточки с ценами и кнопкой «Запросить расчёт»</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Страница «Подрядчикам» — прайс-лист, условия скидок, форма заявки на объект</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>5 гео-страниц: Волоколамское, Новорижское, Пятницкое, Ленинградское, Дмитровское шоссе</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Страница доставки — карта зон, сроки и стоимость по каждому направлению</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>О компании — команда, дилерские сертификаты, гарантии, фото склада</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Контакты + форма обратной связи + кнопка WhatsApp / Telegram</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Мобильная адаптация + базовая SEO-разметка (title, description, og-теги)</span>
+            </div>
+          </div>
+          <div class="pkg-not-included">
+            <strong>Не входит:</strong> калькулятор, портфолио объектов, фильтрация каталога, личный кабинет, онлайн-оплата — доступны в Пакете 02 и 03.
+          </div>
+        </div>
+      </div>
+
+      <!-- PKG 02 -->
+      <div class="pkg featured">
+        <div class="pkg-header">
+          <span class="pkg-num">PKG-02</span>
+          <div class="pkg-name-wrap">
+            <span class="pkg-tag">РОСТ · РЕКОМЕНДУЕМ <span class="chip chip-blue" style="margin-left:4px;">★ оптимально</span></span>
+            <span class="pkg-name">Машина лидов</span>
+          </div>
+          <div class="pkg-price-wrap">
+            <div class="pkg-price">₽130 000</div>
+            <div class="pkg-deadline">Срок — 7 недель</div>
+          </div>
+        </div>
+        <div class="pkg-body">
+          <p class="pkg-desc">Всё из Пакета 01 плюс инструменты захвата SEO-трафика. Калькулятор, портфолио объектов с геолокацией и фильтрация каталога — это то, что превращает сайт в генератор заявок, а не просто визитку.</p>
+          <div class="pkg-included-from">
+            ✓ Включает всё из Пакета 01 — Мультибрендовая витрина
+          </div>
+          <div class="deliverables" style="margin-top:14px;">
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Калькулятор металлочерепицы и профнастила — параметры кровли → список материалов + объём</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Раздел «Наши объекты» — до 20 проектов с геолокацией, фото, описанием материалов</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>+10 гео-страниц: Истра, Волоколамск, Красногорск, Солнечногорск, Клин и др.</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Фильтрация каталога: по бренду, покрытию, цвету, типу профиля</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Блок отзывов с верификацией — с именем, объектом, датой</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>SEO-тексты на 5 категорийных страницах (металлочерепица, профнастил, водостоки, сайдинг, заборы)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PKG 03 -->
+      <div class="pkg">
+        <div class="pkg-header">
+          <span class="pkg-num">PKG-03</span>
+          <div class="pkg-name-wrap">
+            <span class="pkg-tag">СИСТЕМА · B2B E-COMMERCE</span>
+            <span class="pkg-name">Полный цикл продаж</span>
+          </div>
+          <div class="pkg-price-wrap">
+            <div class="pkg-price">₽195 000</div>
+            <div class="pkg-deadline">Срок — 12 недель</div>
+          </div>
+        </div>
+        <div class="pkg-body">
+          <p class="pkg-desc">Всё из Пакета 02 плюс полноценная B2B-инфраструктура. Личный кабинет подрядчика, корзина, брендовые хаб-страницы и интеграция с прайс-листом. Уровень krovelnii.ru — достигается здесь.</p>
+          <div class="pkg-included-from">
+            ✓ Включает всё из Пакетов 01 и 02
+          </div>
+          <div class="deliverables" style="margin-top:14px;">
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Личный кабинет подрядчика — история заказов, быстрый повтор, индивидуальный прайс</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Корзина + онлайн-заявка на оформление (без оплаты или с эквайрингом — на выбор)</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Брендовые хаб-страницы: /brand/metallprofil/, /brand/docke/, /brand/technonikol/</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Admin-панель: обновление цен и остатков через CSV / ручной интерфейс</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Калькулятор водостока — расчёт по периметру кровли</span>
+            </div>
+            <div class="deliverable">
+              <div class="deliverable-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+              <span>Архитектура каталога под новые бренды — при наличии договорённостей с поставщиками</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SECTION 03: СМЕТА ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Смета</h2>
+    </div>
+
+    <table class="smeta">
+      <thead>
+        <tr>
+          <th style="width:40%;">Позиция</th>
+          <th>Пакет 01</th>
+          <th>Пакет 02</th>
+          <th>Пакет 03</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="group-row">
+          <td colspan="4">Дизайн и разработка</td>
+        </tr>
+        <tr>
+          <td>Проектирование архитектуры и UX<div class="price-note">Карта страниц, wireframes ключевых экранов</div></td>
+          <td class="price-cell">₽12 000</td>
+          <td class="price-cell">₽12 000</td>
+          <td class="price-cell">₽12 000</td>
+        </tr>
+        <tr>
+          <td>UI-дизайн (Figma)<div class="price-note">Главная, каталог, карточка, мобильные экраны</div></td>
+          <td class="price-cell">₽18 000</td>
+          <td class="price-cell">₽18 000</td>
+          <td class="price-cell">₽18 000</td>
+        </tr>
+        <tr>
+          <td>Вёрстка и фронтенд<div class="price-note">Все страницы, адаптив, анимации</div></td>
+          <td class="price-cell">₽22 000</td>
+          <td class="price-cell">₽32 000</td>
+          <td class="price-cell">₽45 000</td>
+        </tr>
+        <tr>
+          <td>Каталог с карточками и ценами<div class="price-note">3 бренда / расширенный каталог в пак. 03</div></td>
+          <td class="price-cell">₽10 000</td>
+          <td class="price-cell">₽10 000</td>
+          <td class="price-cell">₽18 000</td>
+        </tr>
+
+        <tr class="group-row">
+          <td colspan="4">Страницы и контент</td>
+        </tr>
+        <tr>
+          <td>Гео-страницы<div class="price-note">5 шт. в PKG-01, +10 шт. в PKG-02</div></td>
+          <td class="price-cell">₽8 000</td>
+          <td class="price-cell">₽16 000</td>
+          <td class="price-cell">₽16 000</td>
+        </tr>
+        <tr>
+          <td>Страница «Подрядчикам»<div class="price-note">Прайс, условия, форма заявки</div></td>
+          <td class="price-cell">₽5 000</td>
+          <td class="price-cell">₽5 000</td>
+          <td class="price-cell">₽5 000</td>
+        </tr>
+        <tr>
+          <td>SEO-тексты категорий<div class="price-note">Включены в PKG-02 и PKG-03</div></td>
+          <td class="price-cell" style="color:var(--mute);">—</td>
+          <td class="price-cell">₽12 000</td>
+          <td class="price-cell">₽12 000</td>
+        </tr>
+
+        <tr class="group-row">
+          <td colspan="4">Функциональные модули</td>
+        </tr>
+        <tr>
+          <td>Калькулятор кровли<div class="price-note">Металлочерепица + профнастил</div></td>
+          <td class="price-cell" style="color:var(--mute);">—</td>
+          <td class="price-cell">₽15 000</td>
+          <td class="price-cell">₽15 000</td>
+        </tr>
+        <tr>
+          <td>Портфолио объектов с геолокацией<div class="price-note">До 20 объектов</div></td>
+          <td class="price-cell" style="color:var(--mute);">—</td>
+          <td class="price-cell">₽10 000</td>
+          <td class="price-cell">₽10 000</td>
+        </tr>
+        <tr>
+          <td>Фильтрация каталога<div class="price-note">По бренду / покрытию / цвету</div></td>
+          <td class="price-cell" style="color:var(--mute);">—</td>
+          <td class="price-cell">₽10 000</td>
+          <td class="price-cell">₽10 000</td>
+        </tr>
+        <tr>
+          <td>Личный кабинет подрядчика<div class="price-note">История заказов, прайс, повтор заказа</div></td>
+          <td class="price-cell" style="color:var(--mute);">—</td>
+          <td class="price-cell" style="color:var(--mute);">—</td>
+          <td class="price-cell">₽28 000</td>
+        </tr>
+        <tr>
+          <td>Корзина + Admin-панель<div class="price-note">Заявки, обновление цен / остатков</div></td>
+          <td class="price-cell" style="color:var(--mute);">—</td>
+          <td class="price-cell" style="color:var(--mute);">—</td>
+          <td class="price-cell">₽24 000</td>
+        </tr>
+        <tr>
+          <td>Брендовые хаб-страницы + калькулятор водостока</td>
+          <td class="price-cell" style="color:var(--mute);">—</td>
+          <td class="price-cell" style="color:var(--mute);">—</td>
+          <td class="price-cell">₽17 000</td>
+        </tr>
+
+        <tr class="group-row">
+          <td colspan="4">Запуск</td>
+        </tr>
+        <tr>
+          <td>Деплой, настройка домена, SSL<div class="price-note">Хостинг оплачивается отдельно клиентом</div></td>
+          <td class="price-cell">₽5 000</td>
+          <td class="price-cell">₽5 000</td>
+          <td class="price-cell">₽5 000</td>
+        </tr>
+        <tr>
+          <td>Передача исходников + документация<div class="price-note">Figma, репозиторий, README</div></td>
+          <td class="price-cell">включено</td>
+          <td class="price-cell">включено</td>
+          <td class="price-cell">включено</td>
+        </tr>
+
+        <tr class="subtotal-row">
+          <td><strong>Итого</strong></td>
+          <td class="price-cell"><strong>₽80 000</strong></td>
+          <td class="price-cell"><strong>₽130 000</strong></td>
+          <td class="price-cell"><strong>₽195 000</strong></td>
+        </tr>
+        <tr class="total-row">
+          <td>Срок</td>
+          <td class="price-cell">4 нед.</td>
+          <td class="price-cell">7 нед.</td>
+          <td class="price-cell">12 нед.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── SECTION 04: ДОПОЛНИТЕЛЬНО ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Дополнительные услуги</h2>
+    </div>
+    <p style="font-size:13.5px;color:var(--graphite);margin-bottom:20px;">Подключаются к любому пакету после или одновременно с запуском.</p>
+
+    <div class="addons-grid">
+      <div class="addon">
+        <div>
+          <div class="addon-name">Яндекс.Директ — настройка</div>
+          <div class="addon-desc">Рекламные кампании под ключ: поиск + РСЯ, гео-таргетинг по 5 направлениям, сегментация B2C / B2B</div>
+        </div>
+        <div>
+          <div class="addon-price">₽25 000</div>
+          <div class="addon-price-note">разово</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">Яндекс.Директ — ведение</div>
+          <div class="addon-desc">Ежемесячная оптимизация ставок, A/B тексты объявлений, отчётность по лидам</div>
+        </div>
+        <div>
+          <div class="addon-price">₽15 000</div>
+          <div class="addon-price-note">/мес</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">SEO-сопровождение</div>
+          <div class="addon-desc">Расширение гео-страниц, новые информационные статьи (выбор материала, монтаж), работа с ссылочным профилем</div>
+        </div>
+        <div>
+          <div class="addon-price">₽18 000</div>
+          <div class="addon-price-note">/мес</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">Техническая поддержка</div>
+          <div class="addon-desc">Обновление цен, новые товарные позиции, мелкие правки, мониторинг работоспособности</div>
+        </div>
+        <div>
+          <div class="addon-price">₽10 000</div>
+          <div class="addon-price-note">/мес</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">Контент объектов</div>
+          <div class="addon-desc">Текстовое описание + геолокация + SEO-оформление одного реализованного проекта под раздел «Наши объекты»</div>
+        </div>
+        <div>
+          <div class="addon-price">₽800</div>
+          <div class="addon-price-note">/объект</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">Расширение каталога</div>
+          <div class="addon-desc">Добавление нового бренда или товарной категории с карточками, фильтрами и SEO-страницей (при наличии материалов)</div>
+        </div>
+        <div>
+          <div class="addon-price">₽12 000</div>
+          <div class="addon-price-note">/бренд</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 05: УСЛОВИЯ ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Условия работы</h2>
+    </div>
+
+    <div class="terms-grid">
+      <div class="term-block">
+        <div class="term-block-title">Оплата</div>
+        <ul class="term-list">
+          <li>50% — предоплата в начале работ</li>
+          <li>50% — по факту сдачи готового сайта</li>
+          <li>Оплата безналичным переводом</li>
+          <li>Договор — обязательно, до старта</li>
+        </ul>
+      </div>
+      <div class="term-block">
+        <div class="term-block-title">Правки и приёмка</div>
+        <ul class="term-list">
+          <li>2 раунда правок включены в каждый пакет</li>
+          <li>Каждый раунд — до 5 правок</li>
+          <li>Дополнительные правки — ₽2 000/раунд</li>
+          <li>Приёмка по чеклисту из ТЗ</li>
+        </ul>
+      </div>
+      <div class="term-block">
+        <div class="term-block-title">Сроки</div>
+        <ul class="term-list">
+          <li>Отсчёт с момента получения предоплаты</li>
+          <li>Срок не включает время ожидания материалов от клиента</li>
+          <li>Задержка материалов более 3 дней — сроки сдвигаются</li>
+          <li>Еженедельный отчёт по прогрессу</li>
+        </ul>
+      </div>
+      <div class="term-block">
+        <div class="term-block-title">После сдачи</div>
+        <ul class="term-list">
+          <li>30 дней гарантийной поддержки бесплатно</li>
+          <li>Передача исходников: Figma + репозиторий</li>
+          <li>README с инструкцией по управлению сайтом</li>
+          <li>Обучение работе с Admin-панелью (PKG-03)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 06: ЧТО ПРЕДОСТАВЛЯЕТ КЛИЕНТ ── -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Что предоставляет клиент</h2>
+    </div>
+    <p style="font-size:13.5px;color:var(--graphite);margin-bottom:16px;">Материалы нужны к старту работ. Чем быстрее — тем точнее в срок.</p>
+    <div class="provides-list">
+      <div class="provide-item"><div class="provide-dot"></div><span>Актуальный прайс-лист (Excel / PDF)</span></div>
+      <div class="provide-item"><div class="provide-dot"></div><span>Дилерские сертификаты МП, Деке, Технониколь</span></div>
+      <div class="provide-item"><div class="provide-dot"></div><span>Фото склада и продукции</span></div>
+      <div class="provide-item"><div class="provide-dot"></div><span>Фото команды (при наличии)</span></div>
+      <div class="provide-item"><div class="provide-dot"></div><span>Описание условий доставки по направлениям</span></div>
+      <div class="provide-item"><div class="provide-dot"></div><span>Логотип и фирменный стиль</span></div>
+      <div class="provide-item"><div class="provide-dot"></div><span>Фото реальных объектов (для PKG-02/03)</span></div>
+      <div class="provide-item"><div class="provide-dot"></div><span>Доступ к домену и хостингу</span></div>
+      <div class="provide-item"><div class="provide-dot"></div><span>Контакты и режим работы</span></div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <div class="cta-block">
+    <div>
+      <div class="cta-title">Следующий шаг — синхронизация</div>
+      <div class="cta-sub">15-минутный созвон для подтверждения трёх открытых вопросов: цены в карточках, статус новых брендов, формат работы. После — договор и старт в течение 48 часов.</div>
+    </div>
+    <div class="cta-actions">
+      <a href="#" class="cta-btn cta-btn-primary">Выбрать пакет</a>
+      <a href="#" class="cta-btn cta-btn-secondary">Задать вопрос</a>
+    </div>
+  </div>
+
+  <!-- ── DOC FOOTER ── -->
+  <footer class="doc-footer">
+    <span class="doc-footer-brand">KULBATSKII OS · SOP v1.2 · Лидер Кровля · TZ-2026-001</span>
+    <span class="doc-footer-note">Документ действителен 14 дней с даты выставления · 20.04.2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
