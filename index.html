@@ -3,42 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>КП · Лидер Кровля</title>
+<title>КП · Лидер Кровля · v2.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter+Tight:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
-/* ── TOKENS (from styles.css) ── */
+/* ── TOKENS ── */
 :root {
-  --ink:        #0a0f1c;
-  --ink-2:      #1a2235;
-  --graphite:   #4a5568;
-  --mute:       #6b7280;
-  --hair:       #e5e7eb;
-  --paper:      #ffffff;
-  --snow:       #fafbfc;
-  --cream:      #f5f6f8;
-  --accent:     #2563eb;
-  --accent-d:   #1d4ed8;
-  --accent-s:   #eff6ff;
-  --signal:     #10b981;
-  --danger:     #dc2626;
+  --ink:      #0a0f1c;
+  --ink-2:    #1a2235;
+  --graphite: #4a5568;
+  --mute:     #6b7280;
+  --hair:     #e5e7eb;
+  --paper:    #ffffff;
+  --snow:     #fafbfc;
+  --cream:    #f5f6f8;
+  --accent:   #2563eb;
+  --accent-d: #1d4ed8;
+  --accent-s: #eff6ff;
+  --signal:   #10b981;
+  --danger:   #dc2626;
 
   --F-head: 'Manrope',        sans-serif;
   --F-body: 'Inter Tight',    sans-serif;
   --F-mono: 'JetBrains Mono', monospace;
 
-  --shadow-xs: 0 1px 4px rgba(10,15,28,.06);
-  --shadow-sm: 0 2px 12px rgba(10,15,28,.07), 0 1px 3px rgba(10,15,28,.04);
-  --shadow-md: 0 4px 24px rgba(10,15,28,.09), 0 1px 6px rgba(10,15,28,.04);
-  --shadow-lg: 0 8px 40px rgba(10,15,28,.12), 0 2px 8px rgba(10,15,28,.05);
+  --sh-xs: 0 1px 4px rgba(10,15,28,.06);
+  --sh-sm: 0 2px 12px rgba(10,15,28,.07), 0 1px 3px rgba(10,15,28,.04);
+  --sh-md: 0 4px 24px rgba(10,15,28,.09), 0 1px 6px rgba(10,15,28,.04);
+  --sh-lg: 0 8px 40px rgba(10,15,28,.12), 0 2px 8px rgba(10,15,28,.05);
 
   --ease: cubic-bezier(.2,.8,.2,1);
 }
 
-/* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
 body {
   font-family: var(--F-body);
   font-size: 14px;
@@ -46,859 +46,415 @@ body {
   color: var(--ink);
   background: var(--snow);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ── PAGE ── */
-.page {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 0 32px 100px;
-}
+.page { max-width: 880px; margin: 0 auto; padding: 0 32px 100px; }
+
+/* ── FADE-UP ── */
+.fu { opacity: 0; transform: translateY(16px); animation: fu .6s var(--ease) forwards; }
+@keyframes fu { to { opacity: 1; transform: none; } }
+.d1{animation-delay:.04s}.d2{animation-delay:.10s}.d3{animation-delay:.17s}
+.d4{animation-delay:.24s}.d5{animation-delay:.31s}.d6{animation-delay:.38s}
 
 /* ── DOC HEADER ── */
-.doc-header {
+.doc-head {
   padding: 52px 0 44px;
   border-bottom: 2px solid var(--ink);
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: end;
   gap: 32px;
-  margin-bottom: 64px;
+  margin-bottom: 0;
 }
 
-.doc-brand {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 22px;
-}
+.doc-brand { display: flex; align-items: center; gap: 9px; margin-bottom: 22px; }
 
 .brand-sq {
   width: 24px; height: 24px;
+  background: var(--ink); border-radius: 6px;
+  position: relative; overflow: hidden; flex-shrink: 0;
+}
+.brand-sq::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--accent) 0%,transparent 55%); }
+.brand-sq::after  { content:''; position:absolute; top:50%; left:50%; width:8px; height:8px; border:1.5px solid #fff; border-radius:50%; transform:translate(-50%,-50%); }
+
+.brand-name { font-family:var(--F-head); font-size:13px; font-weight:700; letter-spacing:-.01em; }
+
+.doc-h1 { font-family:var(--F-head); font-size:clamp(30px,5vw,42px); font-weight:800; letter-spacing:-.04em; line-height:1.05; color:var(--ink); }
+.doc-h1 em { font-style:normal; color:var(--mute); font-weight:600; }
+
+.doc-meta { text-align:right; }
+.doc-meta-row { font-family:var(--F-mono); font-size:11px; color:var(--mute); line-height:2; }
+.doc-meta-row b { color:var(--ink-2); font-weight:500; }
+
+/* ── HERO UTP ── */
+.hero {
   background: var(--ink);
-  border-radius: 6px;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
+  border-radius: 0 0 20px 20px;
+  padding: 44px 48px 48px;
+  position: relative; overflow: hidden;
+  box-shadow: var(--sh-lg);
+  margin-bottom: 72px;
 }
-.brand-sq::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, var(--accent) 0%, transparent 55%);
+.hero::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:340px; height:340px;
+  background:radial-gradient(circle,rgba(37,99,235,.22) 0%,transparent 60%);
+  pointer-events:none;
 }
-.brand-sq::after {
-  content: '';
-  position: absolute; top: 50%; left: 50%;
-  width: 8px; height: 8px;
-  border: 1.5px solid #fff;
-  border-radius: 50%;
-  transform: translate(-50%,-50%);
-}
-
-.brand-name {
-  font-family: var(--F-head);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+.hero::after {
+  content:''; position:absolute; bottom:-60px; left:-60px;
+  width:260px; height:260px;
+  background:radial-gradient(circle,rgba(16,185,129,.1) 0%,transparent 60%);
+  pointer-events:none;
 }
 
-.doc-h1 {
-  font-family: var(--F-head);
-  font-size: clamp(30px, 5vw, 42px);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
-  color: var(--ink);
+.hero-eyebrow {
+  font-family:var(--F-mono); font-size:10.5px; letter-spacing:.08em;
+  text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:16px;
 }
 
-.doc-h1 em {
-  font-style: normal;
-  color: var(--mute);
-  font-weight: 600;
+.hero-headline {
+  font-family:var(--F-head); font-size:clamp(20px,3vw,26px); font-weight:800;
+  letter-spacing:-.03em; color:#fff; line-height:1.2; max-width:560px;
+  margin-bottom:14px; position:relative;
 }
 
-.doc-meta { text-align: right; }
-
-.doc-meta-row {
-  font-family: var(--F-mono);
-  font-size: 11px;
-  color: var(--mute);
-  line-height: 2;
+.hero-sub {
+  font-size:13.5px; color:rgba(255,255,255,.5); line-height:1.65;
+  max-width:580px; margin-bottom:36px; position:relative;
 }
 
-.doc-meta-row b { color: var(--ink-2); font-weight: 500; }
+.hero-pills {
+  display:flex; flex-wrap:wrap; gap:10px; position:relative;
+}
+
+.hero-pill {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 14px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:100px;
+  font-size:12.5px; color:rgba(255,255,255,.7);
+}
+
+.hero-pill-dot {
+  width:6px; height:6px; border-radius:50%;
+}
+.hero-pill-dot.blue  { background:var(--accent); }
+.hero-pill-dot.green { background:var(--signal); }
+.hero-pill-dot.amber { background:#f59e0b; }
 
 /* ── SECTION ── */
-.sec { margin-bottom: 72px; }
+.sec { margin-bottom:72px; }
 
-.sec-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 32px;
-}
+.sec-label { display:flex; align-items:center; gap:12px; margin-bottom:32px; }
+.sec-num { font-family:var(--F-mono); font-size:11px; color:var(--accent); letter-spacing:.06em; }
+.sec-title { font-family:var(--F-head); font-size:22px; font-weight:700; letter-spacing:-.025em; }
 
-.sec-num {
-  font-family: var(--F-mono);
-  font-size: 11px;
-  color: var(--accent);
-  letter-spacing: 0.06em;
+/* ── CONTEXT GRID ── */
+.ctx-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.ctx-card {
+  background:var(--paper); border-radius:12px; padding:20px 22px;
+  box-shadow:var(--sh-xs);
 }
-
-.sec-title {
-  font-family: var(--F-head);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-}
+.ctx-card.hi { background:var(--accent-s); }
+.ctx-label { font-family:var(--F-mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--mute); margin-bottom:8px; }
+.ctx-card.hi .ctx-label { color:rgba(37,99,235,.6); }
+.ctx-text { font-size:13.5px; color:var(--ink-2); line-height:1.55; }
+.ctx-card.hi .ctx-text { color:var(--accent-d); font-weight:500; }
 
 /* ── DIAGNOSIS ── */
 .diag {
-  background: var(--ink);
-  border-radius: 20px;
-  padding: 44px 48px;
-  margin-bottom: 72px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
+  background:var(--ink); border-radius:20px; padding:44px 48px;
+  margin-bottom:72px; position:relative; overflow:hidden;
+  box-shadow:var(--sh-lg);
+}
+.diag::before { content:''; position:absolute; top:-100px; right:-100px; width:380px; height:380px; background:radial-gradient(circle,rgba(37,99,235,.2) 0%,transparent 60%); pointer-events:none; }
+.diag::after  { content:''; position:absolute; bottom:-80px; left:-60px; width:260px; height:260px; background:radial-gradient(circle,rgba(220,38,38,.12) 0%,transparent 60%); pointer-events:none; }
+
+.diag-eyebrow { font-family:var(--F-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:16px; }
+.diag-headline { font-family:var(--F-head); font-size:clamp(18px,2.5vw,22px); font-weight:700; letter-spacing:-.025em; color:#fff; line-height:1.3; max-width:480px; margin-bottom:36px; position:relative; }
+
+.diag-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px; position:relative; }
+.diag-stat { background:rgba(255,255,255,.05); border-radius:12px; padding:24px 22px; backdrop-filter:blur(4px); }
+.diag-n { font-family:var(--F-head); font-weight:800; font-size:clamp(40px,5vw,56px); letter-spacing:-.05em; line-height:1; margin-bottom:10px; }
+.diag-n.red   { color:#f87171; }
+.diag-n.amber { color:#fbbf24; }
+.diag-n.pale  { color:rgba(255,255,255,.7); }
+.diag-lbl { font-size:12px; color:rgba(255,255,255,.4); line-height:1.45; }
+
+/* ── INACTION COST ── */
+.inaction-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.inaction-card {
+  background:var(--paper); border-radius:12px; padding:22px 20px;
+  box-shadow:var(--sh-xs); display:flex; flex-direction:column; gap:14px;
+}
+.inaction-header { display:flex; justify-content:space-between; align-items:flex-start; }
+.inaction-scenario { font-family:var(--F-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--mute); }
+.inaction-turnover { font-family:var(--F-head); font-size:18px; font-weight:700; letter-spacing:-.03em; color:var(--ink); }
+.inaction-row { display:flex; flex-direction:column; gap:2px; }
+.inaction-row-label { font-size:11.5px; color:var(--mute); }
+.inaction-row-val { font-family:var(--F-head); font-size:15px; font-weight:700; letter-spacing:-.02em; color:var(--ink); }
+.inaction-row-val.red { color:var(--danger); }
+.inaction-divider { border:none; border-top:1px solid var(--hair); }
+.inaction-payback { font-size:12.5px; color:var(--graphite); line-height:1.5; padding-top:2px; }
+.inaction-payback strong { color:var(--accent); font-weight:600; }
+
+.inaction-note {
+  margin-top:16px; padding:14px 18px;
+  background:var(--accent-s); border-radius:10px;
+  font-size:13px; color:var(--accent-d); line-height:1.6;
 }
 
-.diag::before {
-  content: '';
-  position: absolute;
-  top: -100px; right: -100px;
-  width: 380px; height: 380px;
-  background: radial-gradient(circle, rgba(37,99,235,.2) 0%, transparent 60%);
-  pointer-events: none;
+/* ── TEAM ── */
+.team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:28px; }
+.team-card {
+  background:var(--paper); border-radius:12px; padding:22px 20px;
+  box-shadow:var(--sh-xs);
+}
+.team-role { font-family:var(--F-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent); margin-bottom:8px; }
+.team-name { font-family:var(--F-head); font-size:16px; font-weight:700; letter-spacing:-.02em; color:var(--ink); margin-bottom:6px; }
+.team-desc { font-size:12.5px; color:var(--graphite); line-height:1.5; }
+
+.cases-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.case-card {
+  background:var(--paper); border-radius:10px; padding:16px 18px;
+  box-shadow:var(--sh-xs); display:grid; grid-template-columns:1fr auto; gap:12px; align-items:start;
+}
+.case-name { font-family:var(--F-head); font-size:13.5px; font-weight:700; letter-spacing:-.01em; color:var(--ink); margin-bottom:4px; }
+.case-desc { font-size:12.5px; color:var(--graphite); line-height:1.5; }
+.case-badge {
+  font-family:var(--F-mono); font-size:11px; color:var(--mute);
+  background:var(--cream); padding:4px 9px; border-radius:6px; white-space:nowrap;
 }
 
-.diag::after {
-  content: '';
-  position: absolute;
-  bottom: -80px; left: -60px;
-  width: 260px; height: 260px;
-  background: radial-gradient(circle, rgba(220,38,38,.12) 0%, transparent 60%);
-  pointer-events: none;
+/* ── HOW WE FIT ── */
+.pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.pillar {
+  background:var(--paper); border-radius:12px; padding:22px 20px;
+  box-shadow:var(--sh-xs);
 }
-
-.diag-eyebrow {
-  font-family: var(--F-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.3);
-  margin-bottom: 16px;
-}
-
-.diag-headline {
-  font-family: var(--F-head);
-  font-size: clamp(18px, 2.5vw, 22px);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: #fff;
-  line-height: 1.3;
-  max-width: 480px;
-  margin-bottom: 36px;
-  position: relative;
-}
-
-.diag-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
-  position: relative;
-}
-
-.diag-stat {
-  background: rgba(255,255,255,.05);
-  border-radius: 12px;
-  padding: 24px 22px;
-  backdrop-filter: blur(4px);
-}
-
-.diag-n {
-  font-family: var(--F-head);
-  font-weight: 800;
-  font-size: clamp(40px, 5vw, 56px);
-  letter-spacing: -0.05em;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-
-.diag-n.red   { color: #f87171; }
-.diag-n.amber { color: #fbbf24; }
-.diag-n.pale  { color: rgba(255,255,255,.7); }
-
-.diag-lbl {
-  font-size: 12px;
-  color: rgba(255,255,255,.4);
-  line-height: 1.45;
-}
-
-.diag-calc {
-  background: rgba(220,38,38,.1);
-  border: 1px solid rgba(248,113,113,.2);
-  border-radius: 12px;
-  padding: 20px 24px;
-  position: relative;
-}
-
-.diag-calc-kicker {
-  font-family: var(--F-mono);
-  font-size: 10px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: rgba(248,113,113,.5);
-  margin-bottom: 8px;
-}
-
-.diag-calc-body {
-  font-size: 13px;
-  color: rgba(255,255,255,.5);
-  line-height: 1.65;
-}
-
-.diag-calc-body strong { color: #f87171; font-weight: 600; }
-
-.diag-calc-result {
-  font-family: var(--F-head);
-  font-size: 15px;
-  font-weight: 700;
-  color: rgba(255,255,255,.85);
-  letter-spacing: -0.015em;
-  margin-top: 12px;
-}
-
-.diag-footnote {
-  margin-top: 20px;
-  font-size: 12px;
-  color: rgba(255,255,255,.28);
-  line-height: 1.65;
-  position: relative;
-}
+.pillar-num { font-family:var(--F-mono); font-size:11px; color:var(--accent); letter-spacing:.04em; margin-bottom:12px; }
+.pillar-title { font-family:var(--F-head); font-size:15px; font-weight:700; letter-spacing:-.02em; color:var(--ink); margin-bottom:8px; }
+.pillar-text { font-size:12.5px; color:var(--graphite); line-height:1.55; }
 
 /* ── PACKAGES ── */
-.pkgs {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+.pkgs { display:flex; flex-direction:column; gap:16px; }
 
-.pkg {
-  background: var(--paper);
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-}
+.pkg { background:var(--paper); border-radius:16px; box-shadow:var(--sh-sm); overflow:hidden; }
 
 .pkg-head {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 24px;
-  padding: 28px 32px;
-  background: var(--cream);
-  border-radius: 16px 16px 0 0;
+  display:grid; grid-template-columns:1fr auto;
+  align-items:center; gap:24px;
+  padding:28px 32px;
+  background:var(--cream); border-radius:16px 16px 0 0;
 }
 
-.pkg-tier {
-  font-family: var(--F-mono);
-  font-size: 10px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--mute);
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.pkg-tier { font-family:var(--F-mono); font-size:10px; letter-spacing:.07em; text-transform:uppercase; color:var(--mute); margin-bottom:5px; display:flex; align-items:center; gap:8px; }
+.pkg-name { font-family:var(--F-head); font-size:20px; font-weight:700; letter-spacing:-.025em; color:var(--ink); }
+.pkg-price { font-family:var(--F-head); font-size:24px; font-weight:700; letter-spacing:-.04em; color:var(--ink); text-align:right; white-space:nowrap; }
+.pkg-weeks { font-family:var(--F-mono); font-size:10px; color:var(--mute); letter-spacing:.04em; text-align:right; margin-top:3px; }
+
+.pkg-body { padding:28px 32px 32px; }
+.pkg-desc { font-size:14px; color:var(--graphite); line-height:1.65; margin-bottom:20px; max-width:580px; }
+.pkg-why { font-size:13px; color:var(--ink-2); line-height:1.6; padding:12px 16px; background:var(--accent-s); border-radius:8px; margin-bottom:22px; }
+.pkg-why b { font-weight:600; }
+.pkg-from { font-size:12.5px; color:var(--signal); display:flex; align-items:center; gap:7px; margin-bottom:18px; font-weight:500; }
+
+.pkg-items { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:20px; }
+.pkg-item { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--ink-2); line-height:1.5; }
+.pkg-dot { flex-shrink:0; width:16px; height:16px; background:var(--accent-s); border-radius:4px; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+.pkg-dot svg { width:9px; height:9px; stroke:var(--accent); fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+
+.pkg-limit { display:flex; gap:12px; align-items:flex-start; padding:13px 16px; background:#fef2f2; border-radius:8px; font-size:13px; color:#b91c1c; line-height:1.55; }
+.pkg-limit-tag { font-family:var(--F-mono); font-size:9.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--danger); font-weight:500; flex-shrink:0; padding-top:2px; white-space:nowrap; }
+
+.pkg.feat { box-shadow:var(--sh-md),0 0 0 2px var(--ink); }
+.pkg.feat .pkg-head { background:var(--ink); }
+.pkg.feat .pkg-tier  { color:rgba(255,255,255,.35); }
+.pkg.feat .pkg-name  { color:#fff; }
+.pkg.feat .pkg-price { color:#fff; }
+.pkg.feat .pkg-weeks { color:rgba(255,255,255,.3); }
+
+.feat-pill { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; background:var(--accent); color:#fff; border-radius:100px; font-family:var(--F-mono); font-size:9.5px; letter-spacing:.04em; font-weight:500; }
+
+/* ── TIMELINE ── */
+.timeline-wrap {
+  background:var(--paper); border-radius:16px; padding:32px 32px 28px;
+  box-shadow:var(--sh-sm); margin-top:28px;
 }
+.timeline-title { font-family:var(--F-head); font-size:15px; font-weight:700; letter-spacing:-.02em; margin-bottom:6px; }
+.timeline-sub { font-size:13px; color:var(--graphite); margin-bottom:24px; }
 
-.pkg-name {
-  font-family: var(--F-head);
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-}
+.timeline-roles { display:flex; gap:16px; margin-bottom:16px; flex-wrap:wrap; }
+.timeline-role { display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--graphite); }
+.role-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.role-dot.blue  { background:var(--accent); }
+.role-dot.teal  { background:#0891b2; }
+.role-dot.green { background:var(--signal); }
 
-.pkg-price {
-  font-family: var(--F-head);
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--ink);
-  text-align: right;
-  white-space: nowrap;
-}
+.tl-track { position:relative; }
+.tl-days-row { display:grid; grid-template-columns:140px repeat(12,1fr); gap:4px; margin-bottom:6px; }
+.tl-day-label { font-family:var(--F-mono); font-size:10px; color:var(--mute); text-align:center; letter-spacing:.03em; }
+.tl-day-label:first-child { text-align:left; }
 
-.pkg-weeks {
-  font-family: var(--F-mono);
-  font-size: 10px;
-  color: var(--mute);
-  letter-spacing: 0.04em;
-  text-align: right;
-  margin-top: 3px;
-}
+.tl-row { display:grid; grid-template-columns:140px repeat(12,1fr); gap:4px; margin-bottom:5px; align-items:center; }
+.tl-row-label { font-size:12px; color:var(--ink-2); font-weight:500; padding-right:8px; }
+.tl-cell { height:22px; border-radius:4px; }
+.tl-cell.empty { background:transparent; }
+.tl-cell.blue  { background:var(--accent); opacity:.85; }
+.tl-cell.teal  { background:#0891b2; opacity:.85; }
+.tl-cell.green { background:var(--signal); opacity:.85; }
 
-.pkg-body {
-  padding: 28px 32px 32px;
-}
-
-.pkg-desc {
-  font-size: 14px;
-  color: var(--graphite);
-  line-height: 1.65;
-  margin-bottom: 20px;
-  max-width: 580px;
-}
-
-.pkg-why {
-  font-size: 13px;
-  color: var(--ink-2);
-  line-height: 1.6;
-  padding: 12px 16px;
-  background: var(--accent-s);
-  border-radius: 8px;
-  margin-bottom: 22px;
-}
-
-.pkg-why b { font-weight: 600; }
-
-.pkg-from {
-  font-size: 12.5px;
-  color: var(--signal);
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 18px;
-  font-weight: 500;
-}
-
-.pkg-items {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.pkg-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--ink-2);
-  line-height: 1.5;
-}
-
-.pkg-dot {
-  flex-shrink: 0;
-  width: 16px; height: 16px;
-  background: var(--accent-s);
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1px;
-}
-
-.pkg-dot svg {
-  width: 9px; height: 9px;
-  stroke: var(--accent);
-  fill: none;
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.pkg-limit {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 13px 16px;
-  background: #fef2f2;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #b91c1c;
-  line-height: 1.55;
-}
-
-.pkg-limit-tag {
-  font-family: var(--F-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--danger);
-  font-weight: 500;
-  flex-shrink: 0;
-  padding-top: 2px;
-  white-space: nowrap;
-}
-
-/* ── FEATURED PKG ── */
-.pkg.feat {
-  box-shadow: var(--shadow-md), 0 0 0 2px var(--ink);
-}
-
-.pkg.feat .pkg-head {
-  background: var(--ink);
-}
-
-.pkg.feat .pkg-tier { color: rgba(255,255,255,.35); }
-
-.pkg.feat .pkg-name { color: #fff; }
-
-.pkg.feat .pkg-price { color: #fff; }
-
-.pkg.feat .pkg-weeks { color: rgba(255,255,255,.3); }
-
-.feat-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px 8px;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 100px;
-  font-family: var(--F-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.04em;
-  font-weight: 500;
-}
+.tl-task { height:22px; border-radius:4px; display:flex; align-items:center; padding:0 8px; font-size:10.5px; color:#fff; font-weight:500; white-space:nowrap; overflow:hidden; grid-column:var(--span); }
+.tl-task.blue  { background:var(--accent); }
+.tl-task.teal  { background:#0891b2; }
+.tl-task.green { background:var(--signal); }
 
 /* ── SMETA ── */
-.smeta-wrap {
-  background: var(--paper);
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
+.smeta-wrap { background:var(--paper); border-radius:16px; box-shadow:var(--sh-sm); overflow:hidden; }
+table.smeta { width:100%; border-collapse:collapse; font-size:13px; }
+.smeta thead th { font-family:var(--F-mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--mute); padding:14px 20px; text-align:left; background:var(--cream); border-bottom:1px solid var(--hair); font-weight:500; }
+.smeta thead th:not(:first-child) { text-align:right; }
+.smeta td { padding:11px 20px; color:var(--ink-2); border-bottom:1px solid var(--hair); vertical-align:top; }
+.smeta td:not(:first-child) { text-align:right; font-family:var(--F-mono); font-size:12.5px; white-space:nowrap; }
+.smeta .snote { font-size:11.5px; color:var(--mute); margin-top:2px; font-family:var(--F-body); }
+.smeta tr.gr td { font-family:var(--F-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--mute); background:var(--snow); padding:8px 20px; }
+.smeta tr.sub td { background:var(--accent-s); color:var(--accent-d); font-weight:600; font-size:13.5px; }
+.smeta tr.sub td:first-child { color:var(--ink); }
+.smeta tr.tot td { background:var(--ink); color:#fff; font-family:var(--F-head); font-weight:700; font-size:14px; text-align:right; }
+.smeta tr.tot td:first-child { text-align:left; }
+.smeta .nil { color:var(--hair); }
+
+/* ── SUPPORT TARIFFS ── */
+.support-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.support-card {
+  background:var(--paper); border-radius:14px; overflow:hidden;
+  box-shadow:var(--sh-xs);
 }
-
-table.smeta {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
+.support-card.feat-support { box-shadow:var(--sh-md),0 0 0 2px var(--ink); }
+.support-head {
+  padding:20px 20px 16px;
+  background:var(--cream);
 }
+.support-card.feat-support .support-head { background:var(--ink); }
+.support-tier { font-family:var(--F-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--mute); margin-bottom:4px; display:flex; align-items:center; gap:7px; }
+.support-card.feat-support .support-tier { color:rgba(255,255,255,.4); }
+.support-name { font-family:var(--F-head); font-size:16px; font-weight:700; letter-spacing:-.02em; color:var(--ink); }
+.support-card.feat-support .support-name { color:#fff; }
+.support-price { font-family:var(--F-head); font-size:20px; font-weight:700; letter-spacing:-.03em; color:var(--ink); margin-top:8px; }
+.support-card.feat-support .support-price { color:#fff; }
+.support-price-note { font-family:var(--F-mono); font-size:10px; color:var(--mute); }
+.support-card.feat-support .support-price-note { color:rgba(255,255,255,.3); }
 
-.smeta thead th {
-  font-family: var(--F-mono);
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--mute);
-  padding: 14px 20px;
-  text-align: left;
-  background: var(--cream);
-  border-bottom: 1px solid var(--hair);
-  font-weight: 500;
+.support-body { padding:18px 20px 20px; }
+.support-list { list-style:none; display:flex; flex-direction:column; gap:7px; margin-bottom:14px; }
+.support-list li { font-size:12.5px; color:var(--graphite); line-height:1.5; padding-left:16px; position:relative; }
+.support-list li::before { content:''; position:absolute; left:0; top:9px; width:7px; height:1px; background:var(--accent); }
+.support-limit { font-size:12px; color:var(--mute); font-style:italic; line-height:1.5; }
+.support-for { font-size:12px; color:var(--ink-2); margin-top:10px; padding:8px 10px; background:var(--snow); border-radius:6px; line-height:1.45; }
+.support-for b { font-weight:600; color:var(--ink); }
+
+.support-anchor {
+  margin-top:20px; padding:16px 20px;
+  background:var(--accent-s); border-radius:12px;
+  font-size:13.5px; color:var(--accent-d); line-height:1.65;
 }
+.support-anchor strong { font-weight:700; }
 
-.smeta thead th:not(:first-child) { text-align: right; }
-
-.smeta td {
-  padding: 11px 20px;
-  color: var(--ink-2);
-  border-bottom: 1px solid var(--hair);
-  vertical-align: top;
-  line-height: 1.45;
+/* ── ADDONS ── */
+.addons-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.addon {
+  background:var(--paper); border-radius:10px; padding:16px 18px;
+  box-shadow:var(--sh-xs); display:grid; grid-template-columns:1fr auto; gap:12px; align-items:start;
 }
+.addon-name { font-family:var(--F-head); font-size:13.5px; font-weight:700; letter-spacing:-.01em; color:var(--ink); margin-bottom:4px; }
+.addon-desc { font-size:12.5px; color:var(--graphite); line-height:1.5; }
+.addon-price { font-family:var(--F-mono); font-size:13px; color:var(--ink); font-weight:500; text-align:right; white-space:nowrap; }
+.addon-note { font-size:11px; color:var(--mute); text-align:right; margin-top:2px; }
 
-.smeta td:not(:first-child) {
-  text-align: right;
-  font-family: var(--F-mono);
-  font-size: 12.5px;
-  white-space: nowrap;
+/* ── BUDGET 12M ── */
+.budget-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.budget-card {
+  background:var(--paper); border-radius:12px; padding:22px 20px;
+  box-shadow:var(--sh-xs);
 }
+.budget-card.hi { box-shadow:var(--sh-sm),0 0 0 1.5px var(--accent); }
+.budget-scenario { font-family:var(--F-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--mute); margin-bottom:6px; display:flex; align-items:center; gap:7px; }
+.budget-name { font-family:var(--F-head); font-size:15px; font-weight:700; letter-spacing:-.02em; color:var(--ink); margin-bottom:16px; }
+.budget-rows { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+.budget-row { display:flex; justify-content:space-between; font-size:12.5px; }
+.budget-row-label { color:var(--graphite); }
+.budget-row-val { font-family:var(--F-mono); font-size:12px; color:var(--ink-2); }
+.budget-divider { border:none; border-top:1px solid var(--hair); margin:10px 0; }
+.budget-total { display:flex; justify-content:space-between; align-items:center; }
+.budget-total-label { font-size:13px; font-weight:600; color:var(--ink); }
+.budget-total-val { font-family:var(--F-head); font-size:18px; font-weight:700; letter-spacing:-.03em; color:var(--ink); }
+.budget-who { font-size:12px; color:var(--mute); margin-top:10px; line-height:1.45; }
 
-.smeta .snote {
-  font-size: 11.5px;
-  color: var(--mute);
-  margin-top: 2px;
-  font-family: var(--F-body);
-}
-
-.smeta tr.gr td {
-  font-family: var(--F-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--mute);
-  background: var(--snow);
-  padding: 8px 20px;
-}
-
-.smeta tr.sub td {
-  background: var(--accent-s);
-  color: var(--accent-d);
-  font-weight: 600;
-  font-size: 13.5px;
-}
-
-.smeta tr.sub td:first-child { color: var(--ink); }
-
-.smeta tr.tot td {
-  background: var(--ink);
-  color: #fff;
-  font-family: var(--F-head);
-  font-weight: 700;
-  font-size: 14px;
-  text-align: right;
-}
-
-.smeta tr.tot td:first-child { text-align: left; }
-
-.smeta .nil { color: var(--hair); }
-
-/* ── ROADMAP ── */
-.roadmap { display: flex; flex-direction: column; gap: 16px; }
-
-.rm {
-  background: var(--paper);
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-}
-
-.rm-head {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 16px;
-  padding: 20px 28px;
-  background: var(--cream);
-}
-
-.rm-phase-lbl {
-  font-family: var(--F-mono);
-  font-size: 10px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.rm-title {
-  font-family: var(--F-head);
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-
-.rm-period {
-  font-family: var(--F-mono);
-  font-size: 11px;
-  color: var(--mute);
-  white-space: nowrap;
-}
-
-.rm-body { padding: 24px 28px; }
-
-.rm-desc {
-  font-size: 13.5px;
-  color: var(--graphite);
-  line-height: 1.65;
-  margin-bottom: 20px;
-  max-width: 560px;
-}
-
-.forks {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-}
-
-.fork {
-  background: var(--snow);
-  border-radius: 10px;
-  padding: 16px 16px;
-  box-shadow: var(--shadow-xs);
-}
-
-.fork-head {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 10px;
-}
-
-.fork-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.fork-dot.amber { background: #f59e0b; }
-.fork-dot.blue  { background: var(--accent); }
-.fork-dot.green { background: var(--signal); }
-
-.fork-lbl {
-  font-family: var(--F-mono);
-  font-size: 10px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--mute);
-}
-
-.fork-trigger {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--ink);
-  line-height: 1.4;
-  margin-bottom: 7px;
-}
-
-.fork-action {
-  font-size: 12px;
-  color: var(--graphite);
-  line-height: 1.55;
-  margin-bottom: 10px;
-}
-
-.fork-cost {
-  font-family: var(--F-mono);
-  font-size: 11px;
-  color: var(--ink-2);
-  font-weight: 500;
-}
-
-.rm-base {
-  margin-top: 14px;
-  padding: 12px 16px;
-  background: var(--snow);
-  border-radius: 8px;
-  font-size: 13px;
-  color: var(--graphite);
-  line-height: 1.55;
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  box-shadow: var(--shadow-xs);
-}
-
-.rm-base-lbl {
-  font-family: var(--F-mono);
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--mute);
-  white-space: nowrap;
-  padding-top: 2px;
-  flex-shrink: 0;
+.budget-note {
+  margin-top:16px; padding:14px 18px;
+  background:var(--accent-s); border-radius:10px;
+  font-size:13px; color:var(--accent-d); line-height:1.6;
 }
 
 /* ── TERMS ── */
-.terms {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.term {
-  background: var(--paper);
-  border-radius: 12px;
-  padding: 22px 24px;
-  box-shadow: var(--shadow-xs);
-}
-
-.term-title {
-  font-family: var(--F-head);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin-bottom: 14px;
-}
-
-.term-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.term-list li {
-  font-size: 13px;
-  color: var(--graphite);
-  line-height: 1.5;
-  padding-left: 16px;
-  position: relative;
-}
-
-.term-list li::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 9px;
-  width: 7px; height: 1px;
-  background: var(--accent);
-}
+.terms { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.term { background:var(--paper); border-radius:12px; padding:22px 24px; box-shadow:var(--sh-xs); }
+.term-title { font-family:var(--F-head); font-size:14px; font-weight:700; letter-spacing:-.01em; color:var(--ink); margin-bottom:14px; }
+.term-list { list-style:none; display:flex; flex-direction:column; gap:7px; }
+.term-list li { font-size:13px; color:var(--graphite); line-height:1.5; padding-left:16px; position:relative; }
+.term-list li::before { content:''; position:absolute; left:0; top:9px; width:7px; height:1px; background:var(--accent); }
+.term-list li.accent-li { color:var(--ink-2); font-weight:500; }
+.term-list li.accent-li::before { background:var(--danger); }
 
 /* ── PROVIDES ── */
-.provides {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.provide {
-  background: var(--paper);
-  border-radius: 10px;
-  padding: 13px 15px;
-  font-size: 13px;
-  color: var(--ink-2);
-  line-height: 1.45;
-  display: flex;
-  gap: 9px;
-  align-items: flex-start;
-  box-shadow: var(--shadow-xs);
-}
-
-.provide::before {
-  content: '';
-  flex-shrink: 0;
-  width: 5px; height: 5px;
-  background: var(--accent);
-  border-radius: 50%;
-  margin-top: 6px;
-}
+.provides { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.provide { background:var(--paper); border-radius:10px; padding:13px 15px; font-size:13px; color:var(--ink-2); line-height:1.45; display:flex; gap:9px; align-items:flex-start; box-shadow:var(--sh-xs); }
+.provide::before { content:''; flex-shrink:0; width:5px; height:5px; background:var(--accent); border-radius:50%; margin-top:6px; }
 
 /* ── CTA ── */
 .cta {
-  background: var(--ink);
-  border-radius: 20px;
-  padding: 40px 44px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
+  background:var(--ink); border-radius:20px; padding:40px 44px;
+  display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center;
+  position:relative; overflow:hidden; box-shadow:var(--sh-lg);
 }
-
-.cta::before {
-  content: '';
-  position: absolute;
-  top: -80px; right: -80px;
-  width: 280px; height: 280px;
-  background: radial-gradient(circle, rgba(37,99,235,.22) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.cta-title {
-  font-family: var(--F-head);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: #fff;
-  margin-bottom: 8px;
-  position: relative;
-}
-
-.cta-body {
-  font-size: 13.5px;
-  color: rgba(255,255,255,.5);
-  line-height: 1.65;
-  max-width: 400px;
-  position: relative;
-}
-
-.cta-btns {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex-shrink: 0;
-  position: relative;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 13px 24px;
-  border-radius: 10px;
-  font-family: var(--F-body);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-  white-space: nowrap;
-  border: 1px solid transparent;
-  transition: all .2s var(--ease);
-}
-
-.btn-white {
-  background: #fff;
-  color: var(--ink);
-}
-
-.btn-white:hover {
-  background: var(--accent);
-  color: #fff;
-}
-
-.btn-ghost {
-  background: rgba(255,255,255,.07);
-  color: rgba(255,255,255,.65);
-  border-color: rgba(255,255,255,.12);
-}
+.cta::before { content:''; position:absolute; top:-80px; right:-80px; width:280px; height:280px; background:radial-gradient(circle,rgba(37,99,235,.22) 0%,transparent 60%); pointer-events:none; }
+.cta-title { font-family:var(--F-head); font-size:22px; font-weight:700; letter-spacing:-.03em; color:#fff; margin-bottom:8px; position:relative; }
+.cta-body { font-size:13.5px; color:rgba(255,255,255,.5); line-height:1.65; max-width:400px; position:relative; }
+.cta-btns { display:flex; flex-direction:column; gap:8px; flex-shrink:0; position:relative; }
+.btn { display:inline-flex; align-items:center; justify-content:center; padding:13px 24px; border-radius:10px; font-family:var(--F-body); font-size:14px; font-weight:500; cursor:pointer; text-decoration:none; white-space:nowrap; border:1px solid transparent; transition:all .2s var(--ease); }
+.btn-white { background:#fff; color:var(--ink); }
+.btn-white:hover { background:var(--accent); color:#fff; }
+.btn-ghost { background:rgba(255,255,255,.07); color:rgba(255,255,255,.65); border-color:rgba(255,255,255,.12); }
 
 /* ── FOOTER ── */
-.doc-footer {
-  margin-top: 56px;
-  padding-top: 24px;
-  border-top: 1px solid var(--hair);
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.doc-footer span {
-  font-family: var(--F-mono);
-  font-size: 10.5px;
-  color: var(--mute);
-  letter-spacing: .02em;
-}
-
-/* ── ANIMATIONS ── */
-.fade-up {
-  opacity: 0;
-  transform: translateY(16px);
-  animation: fadeUp .6s var(--ease) forwards;
-}
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-.d1 { animation-delay: .05s; }
-.d2 { animation-delay: .12s; }
-.d3 { animation-delay: .19s; }
-.d4 { animation-delay: .26s; }
-.d5 { animation-delay: .33s; }
+.doc-footer { margin-top:56px; padding-top:24px; border-top:1px solid var(--hair); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+.doc-footer span { font-family:var(--F-mono); font-size:10.5px; color:var(--mute); letter-spacing:.02em; }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 700px) {
-  .page { padding: 0 20px 80px; }
-  .doc-header { grid-template-columns: 1fr; }
-  .doc-meta { text-align: left; }
-  .diag { padding: 28px 24px; }
-  .diag-stats { grid-template-columns: 1fr 1fr; }
-  .pkg-head { grid-template-columns: 1fr; gap: 12px; }
-  .pkg-price { text-align: left; }
-  .pkg-weeks { text-align: left; }
-  .pkg-items { grid-template-columns: 1fr; }
-  .forks { grid-template-columns: 1fr; }
-  .terms, .provides { grid-template-columns: 1fr; }
-  .cta { grid-template-columns: 1fr; padding: 28px 24px; }
-  .smeta thead th:nth-child(2),
-  .smeta td:nth-child(2) { display: none; }
+@media (max-width:720px){
+  .page{padding:0 20px 80px}
+  .doc-head{grid-template-columns:1fr}
+  .doc-meta{text-align:left}
+  .hero{padding:28px 24px}
+  .diag{padding:28px 24px}
+  .diag-stats{grid-template-columns:1fr 1fr}
+  .ctx-grid,.inaction-grid,.team-grid,.pillars-grid,.budget-grid,.support-grid,.addons-grid{grid-template-columns:1fr}
+  .cases-grid{grid-template-columns:1fr}
+  .pkg-head{grid-template-columns:1fr;gap:12px}
+  .pkg-price,.pkg-weeks{text-align:left}
+  .pkg-items,.forks,.terms,.provides{grid-template-columns:1fr}
+  .cta{grid-template-columns:1fr;padding:28px 24px}
+  .smeta thead th:nth-child(2),.smeta td:nth-child(2){display:none}
+  .tl-days-row,.tl-row{grid-template-columns:100px repeat(12,1fr)}
+  .tl-row-label{font-size:11px}
 }
 
-@media print {
-  body { background: #fff; }
-  .pkg, .rm, .term { box-shadow: none; border: 1px solid var(--hair); }
+@media print{
+  body{background:#fff}
+  .pkg,.support-card,.term{box-shadow:none;border:1px solid var(--hair)}
 }
 
 </style>
@@ -907,7 +463,7 @@ table.smeta {
 <div class="page">
 
   <!-- ── HEADER ── -->
-  <header class="doc-header fade-up d1">
+  <header class="doc-head fu d1">
     <div>
       <div class="doc-brand">
         <div class="brand-sq"></div>
@@ -916,19 +472,56 @@ table.smeta {
       <h1 class="doc-h1">Коммерческое<br><em>предложение</em></h1>
     </div>
     <div class="doc-meta">
-      <div class="doc-meta-row"><b>Клиент</b>&nbsp;&nbsp;Лидер Кровля</div>
-      <div class="doc-meta-row"><b>Документ</b>&nbsp;&nbsp;KP-2026-001</div>
-      <div class="doc-meta-row"><b>Дата</b>&nbsp;&nbsp;20.04.2026</div>
-      <div class="doc-meta-row"><b>Версия</b>&nbsp;&nbsp;v2.0</div>
-      <div class="doc-meta-row"><b>Действует</b>&nbsp;&nbsp;14 дней</div>
+      <div class="doc-meta-row"><b>Клиент</b>&ensp;Лидер Кровля</div>
+      <div class="doc-meta-row"><b>Документ</b>&ensp;KP-2026-001</div>
+      <div class="doc-meta-row"><b>Версия</b>&ensp;v2.0</div>
+      <div class="doc-meta-row"><b>Дата</b>&ensp;21.04.2026</div>
+      <div class="doc-meta-row"><b>Действует</b>&ensp;14 дней</div>
     </div>
   </header>
 
-  <!-- ── DIAGNOSIS ── -->
-  <div class="diag fade-up d2">
-    <div class="diag-eyebrow">Диагноз · текущее состояние</div>
-    <div class="diag-headline">Бизнес работает.<br>Сайт — нет. Это стоит денег каждый месяц.</div>
+  <!-- ── HERO UTP ── -->
+  <div class="hero fu d2">
+    <div class="hero-eyebrow">KULBATSKII OS · SOP v1.2</div>
+    <div class="hero-headline">Сайт уровня среднего агентства за&nbsp;1/3&nbsp;срока.<br>Без переплат за бюрократию.</div>
+    <div class="hero-sub">Три специалиста — три параллельные дорожки: стратегия и дизайн, разработка, QA. 40+ готовых компонентов, SOP с чеклистом на 67 пунктов, внутренняя AI-автоматизация рутины. Не спешка — процессы.</div>
+    <div class="hero-pills">
+      <span class="hero-pill"><span class="hero-pill-dot blue"></span>PKG-01 за 7 рабочих дней</span>
+      <span class="hero-pill"><span class="hero-pill-dot green"></span>PKG-02 за 12 рабочих дней</span>
+      <span class="hero-pill"><span class="hero-pill-dot amber"></span>Неустойка за срыв срока в договоре</span>
+    </div>
+  </div>
 
+  <!-- ── CONTEXT ── -->
+  <section class="sec fu d2">
+    <div class="sec-label">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">Контекст проекта</h2>
+    </div>
+    <div class="ctx-grid">
+      <div class="ctx-card">
+        <div class="ctx-label">Текущая ситуация</div>
+        <div class="ctx-text">Сайт позиционирован как «официальный дилер Металл Профиль». 0% лидов с сайта, 70% продаж через партнёров. Нет цен в карточках, нет калькуляторов, нет B2B-раздела.</div>
+      </div>
+      <div class="ctx-card">
+        <div class="ctx-label">Что строим</div>
+        <div class="ctx-text">Мультибрендовый региональный сайт с открытыми ценами, гео-страницами под 5 направлений и B2B-механикой для подрядчиков. Ориентир — krovelnii.ru.</div>
+      </div>
+      <div class="ctx-card">
+        <div class="ctx-label">Целевая аудитория</div>
+        <div class="ctx-text">Подрядчики и бригады (70% выручки) — нужен прайс и наличие. Частные клиенты (B2C) — нужна помощь с выбором и калькулятор.</div>
+      </div>
+      <div class="ctx-card hi">
+        <div class="ctx-label">Главное преимущество</div>
+        <div class="ctx-text">Доставка 1–2 дня по 5 направлениям СЗ Подмосковья. Ни один федеральный игрок не закрывает этот гео-спрос на уровне конкретных шоссе и посёлков.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DIAGNOSIS ── -->
+  <div class="diag fu d3">
+    <div class="diag-eyebrow">Диагноз · текущее состояние</div>
+    <div class="diag-headline">Бизнес работает. Сайт — нет.<br>Это стоит денег каждый месяц.</div>
     <div class="diag-stats">
       <div class="diag-stat">
         <div class="diag-n red">0%</div>
@@ -940,82 +533,275 @@ table.smeta {
       </div>
       <div class="diag-stat">
         <div class="diag-n pale">5</div>
-        <div class="diag-lbl">активных направлений<br>без гео-страниц</div>
+        <div class="diag-lbl">активных направлений<br>без единой гео-страницы</div>
       </div>
-    </div>
-
-    <div class="diag-calc">
-      <div class="diag-calc-kicker">Цена бездействия · расчёт</div>
-      <div class="diag-calc-body">
-        При обороте <strong>X ₽/мес</strong> через партнёров и партнёрском дисконте <strong>5–15%</strong> — это <strong>X × 0.10 ₽/мес</strong> маржи, которая уходит посреднику вместо того чтобы оставаться внутри.
-      </div>
-      <div class="diag-calc-result">Назовите цифру — посчитаем точно на созвоне.</div>
-    </div>
-
-    <div class="diag-footnote">
-      Сайт позиционирован как дилер Металл Профиль. Пользователь идёт напрямую к производителю — дешевле в восприятии. Ни один конкурент не закрывает СЗ Подмосковья на уровне конкретных шоссе. Это свободная ниша прямо сейчас.
     </div>
   </div>
 
-  <!-- ── PACKAGES ── -->
-  <section class="sec fade-up d3">
+  <!-- ── INACTION COST ── -->
+  <section class="sec fu d3">
     <div class="sec-label">
-      <span class="sec-num">01</span>
-      <h2 class="sec-title">Три уровня решения</h2>
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">Цена бездействия</h2>
+    </div>
+    <p style="font-size:14px;color:var(--graphite);line-height:1.65;max-width:580px;margin-bottom:24px;">По рынку стройматериалов с региональным охватом цифровой канал даёт 8–12% дополнительной выручки. Пока канал не работает, эта часть уходит к конкурентам.</p>
+    <div class="inaction-grid">
+      <div class="inaction-card">
+        <div class="inaction-header">
+          <span class="inaction-scenario">Сценарий A</span>
+          <span class="inaction-turnover">3 млн/мес</span>
+        </div>
+        <div class="inaction-row">
+          <span class="inaction-row-label">Упущено в месяц</span>
+          <span class="inaction-row-val red">~300 000 ₽</span>
+        </div>
+        <div class="inaction-row">
+          <span class="inaction-row-label">За год</span>
+          <span class="inaction-row-val">3,6 млн ₽</span>
+        </div>
+        <hr class="inaction-divider">
+        <div class="inaction-payback">Окупаемость PKG-02: <strong>~24 дня</strong> недополученных продаж</div>
+      </div>
+      <div class="inaction-card">
+        <div class="inaction-header">
+          <span class="inaction-scenario">Сценарий B</span>
+          <span class="inaction-turnover">7 млн/мес</span>
+        </div>
+        <div class="inaction-row">
+          <span class="inaction-row-label">Упущено в месяц</span>
+          <span class="inaction-row-val red">~700 000 ₽</span>
+        </div>
+        <div class="inaction-row">
+          <span class="inaction-row-label">За год</span>
+          <span class="inaction-row-val">8,4 млн ₽</span>
+        </div>
+        <hr class="inaction-divider">
+        <div class="inaction-payback">Окупаемость PKG-02: <strong>~10 дней</strong></div>
+      </div>
+      <div class="inaction-card">
+        <div class="inaction-header">
+          <span class="inaction-scenario">Сценарий C</span>
+          <span class="inaction-turnover">15 млн/мес</span>
+        </div>
+        <div class="inaction-row">
+          <span class="inaction-row-label">Упущено в месяц</span>
+          <span class="inaction-row-val red">~1,5 млн ₽</span>
+        </div>
+        <div class="inaction-row">
+          <span class="inaction-row-label">За год</span>
+          <span class="inaction-row-val">18 млн ₽</span>
+        </div>
+        <hr class="inaction-divider">
+        <div class="inaction-payback">Окупаемость PKG-03: <strong>~8 дней</strong></div>
+      </div>
+    </div>
+    <div class="inaction-note">Уточним точную цифру под ваш оборот на созвоне — подставим в конкретный расчёт.</div>
+  </section>
+
+  <!-- ── WHO WE ARE ── -->
+  <section class="sec fu d3">
+    <div class="sec-label">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Кто мы</h2>
+    </div>
+    <p style="font-size:14px;color:var(--graphite);line-height:1.65;max-width:580px;margin-bottom:24px;">Продуктовая команда из трёх специалистов. Работаем по SOP v1.2 — параллельными дорожками, с разделением ответственности и библиотекой 40+ компонентов. Базируемся в Аликанте, ведём клиентов в РФ и ЕС.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-role">Strategy &amp; Design Lead</div>
+        <div class="team-name">Эдуард Кулбацкий</div>
+        <div class="team-desc">Позиционирование, UX, UI. Behance-recognized. Автор SOP v1.2.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Technical Lead</div>
+        <div class="team-name">Владислав Кулбацкий</div>
+        <div class="team-desc">Архитектура, разработка, инфраструктура, интеграции.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Operations &amp; QA</div>
+        <div class="team-name">Дмитрий Турчин</div>
+        <div class="team-desc">Приёмка по чеклисту, документация, коммуникация, передача проекта.</div>
+      </div>
+    </div>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div>
+          <div class="case-name">PROJECTME</div>
+          <div class="case-desc">AI SaaS для управления проектами. Next.js, Supabase, Clerk, Anthropic API. Auth, биллинг, AI-интеграция — технически сложнее B2B-сайта.</div>
+        </div>
+        <span class="case-badge">SaaS</span>
+      </div>
+      <div class="case-card">
+        <div>
+          <div class="case-name">Церковный терминал</div>
+          <div class="case-desc">WordPress/WooCommerce + touchscreen-фронтенд. Каталог + заказ + приём платежей — прямой аналог по типу задачи.</div>
+        </div>
+        <span class="case-badge">E-commerce</span>
+      </div>
+      <div class="case-card">
+        <div>
+          <div class="case-name">Zîn Coffee House</div>
+          <div class="case-desc">Многостраничный сайт. Тёмная тема, адаптив, деплой на Vercel.</div>
+        </div>
+        <span class="case-badge">Web</span>
+      </div>
+      <div class="case-card">
+        <div>
+          <div class="case-name">Автоматизация ФНС + Bitrix24</div>
+          <div class="case-desc">Python-интеграция фискальных данных, ЕГРЮЛ, региональная классификация — полный цикл разработки.</div>
+        </div>
+        <span class="case-badge">Automation</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW WE FIT TIMELINE ── -->
+  <section class="sec fu d4">
+    <div class="sec-label">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Как мы укладываемся в срок</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01 ·</div>
+        <div class="pillar-title">Декомпозиция по ответственности</div>
+        <div class="pillar-text">Один специалист — один слой. UX не ждёт дизайн, дизайн не ждёт разработку. Три дорожки работают параллельно. В традиционной студии это эстафета, у нас — синхронный процесс.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02 ·</div>
+        <div class="pillar-title">SOP v1.2 и библиотека компонентов</div>
+        <div class="pillar-text">40+ проверенных компонентов: каталоги, фильтры, калькуляторы, формы, гео-страницы. Новое пишется только там, где нужна уникальность. Чеклист приёмки — 67 пунктов.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03 ·</div>
+        <div class="pillar-title">Multi-agent автоматизация</div>
+        <div class="pillar-text">Собственный AI-стек на KULBATSKII OS автоматизирует рутину: генерация SEO-текстов, чеклисты, мониторинг. Команда занимается только тем, что требует человека.</div>
+      </div>
     </div>
 
-    <p style="font-size:14px;color:var(--graphite);line-height:1.65;max-width:580px;margin-bottom:28px;">
-      Каждый пакет — ответ на конкретную задачу. В каждом честно написано, что он не решает — это ориентир на следующий шаг, не недостаток.
-    </p>
+    <!-- Timeline PKG-02 -->
+    <div class="timeline-wrap">
+      <div class="timeline-title">Таймлайн · PKG-02 · 12 рабочих дней</div>
+      <div class="timeline-sub">Три дорожки идут параллельно с первого дня.</div>
+      <div class="timeline-roles">
+        <span class="timeline-role"><span class="role-dot blue"></span>Эдуард — Strategy &amp; Design</span>
+        <span class="timeline-role"><span class="role-dot teal"></span>Влад — Technical</span>
+        <span class="timeline-role"><span class="role-dot green"></span>Дмитрий — QA &amp; Ops</span>
+      </div>
+      <div class="tl-track">
+        <div class="tl-days-row">
+          <div class="tl-day-label">Дорожка</div>
+          <div class="tl-day-label">1</div><div class="tl-day-label">2</div>
+          <div class="tl-day-label">3</div><div class="tl-day-label">4</div>
+          <div class="tl-day-label">5</div><div class="tl-day-label">6</div>
+          <div class="tl-day-label">7</div><div class="tl-day-label">8</div>
+          <div class="tl-day-label">9</div><div class="tl-day-label">10</div>
+          <div class="tl-day-label">11</div><div class="tl-day-label">12</div>
+        </div>
+        <!-- Eduard -->
+        <div class="tl-row">
+          <div class="tl-row-label">UX + Wireframes</div>
+          <div class="tl-task blue" style="--span:span 3;">UX-карта, wireframes</div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-row-label">UI-дизайн</div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-task blue" style="--span:span 4;">UI-дизайн в Figma</div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div>
+        </div>
+        <!-- Vlad -->
+        <div class="tl-row">
+          <div class="tl-row-label">Архитектура + CMS</div>
+          <div class="tl-cell empty"></div>
+          <div class="tl-task teal" style="--span:span 3;">Архитектура + бэкенд</div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-row-label">Frontend + сборка</div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-task teal" style="--span:span 5;">Фронтенд, наполнение, модули</div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div>
+        </div>
+        <!-- Dmitry -->
+        <div class="tl-row">
+          <div class="tl-row-label">QA + передача</div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-cell empty"></div><div class="tl-cell empty"></div>
+          <div class="tl-task green" style="--span:span 2;">QA 67п. + передача</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PACKAGES ── -->
+  <section class="sec fu d4">
+    <div class="sec-label">
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">Три уровня решения</h2>
+    </div>
+    <p style="font-size:14px;color:var(--graphite);line-height:1.65;max-width:580px;margin-bottom:28px;">Каждый пакет включает предыдущий. В каждом честно написано, что он не решает — это ориентир на следующий уровень, не недостаток.</p>
 
     <div class="pkgs">
 
-      <!-- PKG 01 -->
+      <!-- PKG-01 -->
       <div class="pkg">
         <div class="pkg-head">
           <div>
-            <div class="pkg-tier">Старт · 4 недели</div>
-            <div class="pkg-name">Позиционирование</div>
+            <div class="pkg-tier">Старт · 7 рабочих дней</div>
+            <div class="pkg-name">Мультибрендовая витрина</div>
           </div>
           <div>
-            <div class="pkg-price">₽80 000</div>
-            <div class="pkg-weeks">4 НЕДЕЛИ</div>
+            <div class="pkg-price">₽150 000</div>
+            <div class="pkg-weeks">7 РАБ. ДНЕЙ / 1.5 НЕД.</div>
           </div>
         </div>
         <div class="pkg-body">
-          <p class="pkg-desc">Закрывает дедлайн и легитимизирует мультибрендовую позицию перед подрядчиками. Компания перестаёт быть «дилером одного завода» — становится самостоятельным игроком с открытыми ценами.</p>
-          <div class="pkg-why"><b>Для кого:</b> приоритет — запуститься в месяц и зафиксировать позицию. Осознанный выбор стартовать с фундамента и наращивать после.</div>
+          <p class="pkg-desc">Цифровая инфраструктура, которая легитимизирует мультибрендовое позиционирование и фиксирует гео-охват до того, как туда зайдёт конкурент. На рынке, где никто не закрывает СЗ Подмосковье системно, время занять нишу измеряется месяцами.</p>
+          <div class="pkg-why"><b>Для кого:</b> приоритет — зафиксировать позицию быстро. Осознанный выбор войти в гонку с точки минимального присутствия и наращивать после.</div>
           <div class="pkg-items">
             <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Главная — мультибрендовое УТП, гео-охват 5 направлений, блок доверия</span></div>
             <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Каталог: МП, Деке, Технониколь — карточки с открытыми ценами</span></div>
-            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>«Подрядчикам» — прайс-лист, условия скидок, форма заявки</span></div>
+            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>«Подрядчикам» — прайс-лист, условия скидок, форма заявки на объект</span></div>
             <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>5 гео-страниц под ключевые шоссе СЗ Подмосковья</span></div>
-            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Страница доставки с картой зон по направлениям</span></div>
-            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>WhatsApp + форма обратной связи + базовая SEO-разметка</span></div>
+            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Страница доставки с картой зон и сроками по направлениям</span></div>
+            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>О компании + сертификаты + WhatsApp/Telegram + SEO-разметка</span></div>
           </div>
           <div class="pkg-limit">
-            <span class="pkg-limit-tag">Не решает</span>
-            <span>Не генерирует лиды самостоятельно — это фундамент, не машина роста. Без калькулятора и портфолио пользователь, который ещё выбирает материал, не конвертируется в заявку.</span>
+            <span class="pkg-limit-tag">Следующий уровень</span>
+            <span>Без калькулятора и портфолио объектов пользователь, который ещё выбирает материал, не конвертируется в заявку. Это фиксация позиции — генерация лидов начинается в PKG-02.</span>
           </div>
         </div>
       </div>
 
-      <!-- PKG 02 FEATURED -->
+      <!-- PKG-02 FEATURED -->
       <div class="pkg feat">
         <div class="pkg-head">
           <div>
-            <div class="pkg-tier">Рекомендуем · 7 недель <span class="feat-pill">★ оптимально</span></div>
-            <div class="pkg-name">Работающая воронка</div>
+            <div class="pkg-tier">Рекомендуем в 9 из 10 случаев <span class="feat-pill">★ оптимально</span></div>
+            <div class="pkg-name">Машина лидов</div>
           </div>
           <div>
-            <div class="pkg-price">₽130 000</div>
-            <div class="pkg-weeks">7 НЕДЕЛЬ</div>
+            <div class="pkg-price">₽240 000</div>
+            <div class="pkg-weeks">12 РАБ. ДНЕЙ / 2.5 НЕД.</div>
           </div>
         </div>
         <div class="pkg-body">
-          <p class="pkg-desc">Минимально достаточный объём, чтобы сайт превратился из визитки в генератор заявок. Ниже этого уровня инвестиция не окупается — решение о покупке кровли принимается с калькулятором и портфолио в руках.</p>
-          <div class="pkg-from">✓ Включает всё из пакета 01 — Позиционирование</div>
-          <div class="pkg-why"><b>Почему рекомендуется:</b> именно так работает krovelnii.ru. Калькулятор + гео + портфолио — связка, которая захватывает пользователя на стадии выбора и не отпускает к конкуренту.</div>
+          <p class="pkg-desc">Калькулятор, портфолио с геолокацией и фильтрация — это не декорации, а инструменты захвата SEO-трафика. Без них сайт остаётся визиткой; с ними — начинает отвечать на запросы, по которым вас ищут прямо сейчас.</p>
+          <div class="pkg-from">✓ Включает всё из PKG-01 — Мультибрендовая витрина</div>
+          <div class="pkg-why"><b>Почему рекомендуется:</b> именно так работает krovelnii.ru. Калькулятор + гео-страницы + портфолио — связка, которая захватывает пользователя на стадии выбора и не отпускает к конкуренту.</div>
           <div class="pkg-items">
             <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Калькулятор металлочерепицы + профнастила — параметры → список и объём</span></div>
             <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>«Наши объекты» — до 20 проектов с геолокацией и фото</span></div>
@@ -1025,39 +811,39 @@ table.smeta {
             <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>SEO-тексты на 5 категорийных страницах каталога</span></div>
           </div>
           <div class="pkg-limit">
-            <span class="pkg-limit-tag">Не решает</span>
-            <span>Не закрывает повторные B2B-продажи — нет личного кабинета и истории заказов. Подрядчик, который регулярно закупает, всё равно будет звонить менеджеру.</span>
+            <span class="pkg-limit-tag">Следующий уровень</span>
+            <span>Не закрывает повторные B2B-продажи — нет личного кабинета и истории заказов. Подрядчик, который регулярно закупает крупными объёмами, получает полный инструмент в PKG-03.</span>
           </div>
         </div>
       </div>
 
-      <!-- PKG 03 -->
+      <!-- PKG-03 -->
       <div class="pkg">
         <div class="pkg-head">
           <div>
-            <div class="pkg-tier">Система · 12 недель</div>
-            <div class="pkg-name">B2B-инфраструктура</div>
+            <div class="pkg-tier">Система · 20 рабочих дней</div>
+            <div class="pkg-name">B2B E-Commerce</div>
           </div>
           <div>
-            <div class="pkg-price">₽195 000</div>
-            <div class="pkg-weeks">12 НЕДЕЛЬ</div>
+            <div class="pkg-price">₽390 000</div>
+            <div class="pkg-weeks">20 РАБ. ДНЕЙ / 4 НЕД.</div>
           </div>
         </div>
         <div class="pkg-body">
-          <p class="pkg-desc">Полный e-commerce цикл с B2B-механиками. Личный кабинет подрядчика с индивидуальным прайсом, корзина, admin-панель. Уровень krovelnii.ru — достигается здесь.</p>
-          <div class="pkg-from">✓ Включает всё из пакетов 01 и 02</div>
-          <div class="pkg-why"><b>Когда брать:</b> если есть план активно наращивать B2B-поток в ближайшие 6 месяцев. Без этого плана — избыточно. Лучше пакет 02 сейчас + апгрейд после валидации.</div>
+          <p class="pkg-desc">Уровень полноценного B2B-инструмента. Личный кабинет подрядчика с индивидуальным прайсом и историей заказов — это то, что превращает сайт в канал повторных продаж без участия менеджера. Референс — krovelnii.ru, достигается именно здесь.</p>
+          <div class="pkg-from">✓ Включает всё из PKG-01 и PKG-02</div>
+          <div class="pkg-why"><b>Когда брать:</b> если есть план активно наращивать B2B-поток в ближайшие 6 месяцев. Без этого плана лучше PKG-02 сейчас + апгрейд после валидации.</div>
           <div class="pkg-items">
-            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Личный кабинет подрядчика — история, повтор, индивидуальный прайс</span></div>
+            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Личный кабинет подрядчика — история, повтор, индивидуальный прайс по роли</span></div>
             <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Корзина + онлайн-заявка (без оплаты или с эквайрингом)</span></div>
-            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Admin-панель: обновление цен и остатков через CSV</span></div>
+            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Admin-панель: обновление цен и остатков через CSV/UI</span></div>
             <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Брендовые хаб-страницы: /metallprofil/, /docke/, /technonikol/</span></div>
             <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Калькулятор водостока по периметру кровли</span></div>
-            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Архитектура под новые бренды при наличии договоров</span></div>
+            <div class="pkg-item"><div class="pkg-dot"><svg viewBox="0 0 9 9"><polyline points="1,4.5 3.5,7 8,2"/></svg></div><span>Архитектура под новые бренды при наличии договоров с поставщиками</span></div>
           </div>
           <div class="pkg-limit">
-            <span class="pkg-limit-tag">Не решает</span>
-            <span>Не заменяет маркетинг. Даже с полной инфраструктурой нужен трафик — органический (SEO) или платный (Директ).</span>
+            <span class="pkg-limit-tag">Важно знать</span>
+            <span>Не заменяет маркетинг. Даже с полной инфраструктурой нужен трафик — органический (SEO) или платный (Директ). Смотрите раздел сопровождения.</span>
           </div>
         </div>
       </div>
@@ -1066,121 +852,266 @@ table.smeta {
   </section>
 
   <!-- ── SMETA ── -->
-  <section class="sec fade-up d4">
+  <section class="sec fu d4">
     <div class="sec-label">
-      <span class="sec-num">02</span>
+      <span class="sec-num">06</span>
       <h2 class="sec-title">Смета</h2>
     </div>
-
     <div class="smeta-wrap">
       <table class="smeta">
         <thead>
           <tr>
             <th style="width:44%">Позиция</th>
-            <th>Пакет 01</th>
-            <th>Пакет 02</th>
-            <th>Пакет 03</th>
+            <th>PKG-01</th><th>PKG-02</th><th>PKG-03</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="gr"><td colspan="4">Дизайн и разработка</td></tr>
-          <tr><td>Архитектура и UX<div class="snote">Карта страниц, wireframes</div></td><td>₽12 000</td><td>₽12 000</td><td>₽12 000</td></tr>
-          <tr><td>UI-дизайн (Figma)<div class="snote">Главная, каталог, карточка, мобайл</div></td><td>₽18 000</td><td>₽18 000</td><td>₽18 000</td></tr>
-          <tr><td>Вёрстка и фронтенд<div class="snote">Все страницы, адаптив</div></td><td>₽22 000</td><td>₽32 000</td><td>₽45 000</td></tr>
-          <tr><td>Каталог с карточками и ценами</td><td>₽10 000</td><td>₽10 000</td><td>₽18 000</td></tr>
+          <tr class="gr"><td colspan="4">Проектирование и дизайн</td></tr>
+          <tr><td>Архитектура и UX<div class="snote">Карта страниц, wireframes</div></td><td>₽22 000</td><td>₽22 000</td><td>₽22 000</td></tr>
+          <tr><td>UI-дизайн (Figma)<div class="snote">Главная, каталог, карточка, мобайл</div></td><td>₽35 000</td><td>₽35 000</td><td>₽35 000</td></tr>
+
+          <tr class="gr"><td colspan="4">Разработка</td></tr>
+          <tr><td>Вёрстка и фронтенд<div class="snote">Все страницы, адаптив</div></td><td>₽47 000</td><td>₽48 000</td><td>₽70 000</td></tr>
+          <tr><td>Каталог с карточками и ценами<div class="snote">3 бренда / расширенный в PKG-03</div></td><td>₽18 000</td><td>₽18 000</td><td>₽28 000</td></tr>
 
           <tr class="gr"><td colspan="4">Страницы и контент</td></tr>
-          <tr><td>Гео-страницы<div class="snote">5 шт. в пакете 01, +10 в пакете 02</div></td><td>₽8 000</td><td>₽16 000</td><td>₽16 000</td></tr>
-          <tr><td>«Подрядчикам» + «О компании»</td><td>₽5 000</td><td>₽5 000</td><td>₽5 000</td></tr>
-          <tr><td>SEO-тексты категорий<div class="snote">5 страниц</div></td><td class="nil">—</td><td>₽12 000</td><td>₽12 000</td></tr>
+          <tr><td>Гео-страницы<div class="snote">5 шт. в PKG-01, 15 шт. в PKG-02/03</div></td><td>₽12 000</td><td>₽25 000</td><td>₽25 000</td></tr>
+          <tr><td>«Подрядчикам» + страница доставки</td><td>₽8 000</td><td>₽8 000</td><td>₽8 000</td></tr>
+          <tr><td>SEO-тексты на 5 категориях</td><td class="nil">—</td><td>₽18 000</td><td>₽18 000</td></tr>
 
           <tr class="gr"><td colspan="4">Функциональные модули</td></tr>
-          <tr><td>Калькулятор кровли</td><td class="nil">—</td><td>₽15 000</td><td>₽15 000</td></tr>
-          <tr><td>Портфолио объектов с геолокацией</td><td class="nil">—</td><td>₽10 000</td><td>₽10 000</td></tr>
-          <tr><td>Фильтрация каталога</td><td class="nil">—</td><td>₽10 000</td><td>₽10 000</td></tr>
-          <tr><td>Личный кабинет подрядчика</td><td class="nil">—</td><td class="nil">—</td><td>₽28 000</td></tr>
-          <tr><td>Корзина + Admin-панель</td><td class="nil">—</td><td class="nil">—</td><td>₽24 000</td></tr>
-          <tr><td>Брендовые хаб-страницы + калькулятор водостока</td><td class="nil">—</td><td class="nil">—</td><td>₽17 000</td></tr>
+          <tr><td>Калькулятор металлочерепицы + профнастила</td><td class="nil">—</td><td>₽22 000</td><td>₽22 000</td></tr>
+          <tr><td>Портфолио объектов с геолокацией<div class="snote">До 20 объектов</div></td><td class="nil">—</td><td>₽18 000</td><td>₽18 000</td></tr>
+          <tr><td>Фильтрация каталога</td><td class="nil">—</td><td>₽18 000</td><td>₽18 000</td></tr>
+          <tr><td>Личный кабинет подрядчика<div class="snote">Auth, роли, прайс, история, повтор</div></td><td class="nil">—</td><td class="nil">—</td><td>₽48 000</td></tr>
+          <tr><td>Корзина + Admin-панель<div class="snote">Заявки, CSV-импорт, UI-редактор</div></td><td class="nil">—</td><td class="nil">—</td><td>₽45 000</td></tr>
+          <tr><td>Брендовые хаб-страницы + калькулятор водостока</td><td class="nil">—</td><td class="nil">—</td><td>₽25 000</td></tr>
 
           <tr class="gr"><td colspan="4">Запуск</td></tr>
-          <tr><td>Деплой, домен, SSL<div class="snote">Хостинг — отдельно на клиенте</div></td><td>₽5 000</td><td>₽5 000</td><td>₽5 000</td></tr>
-          <tr><td>Исходники + документация</td><td>вкл.</td><td>вкл.</td><td>вкл.</td></tr>
+          <tr><td>Деплой, домен, SSL<div class="snote">Хостинг — отдельно на клиенте</div></td><td>₽8 000</td><td>₽8 000</td><td>₽8 000</td></tr>
+          <tr><td>Исходники + документация + первый месяц сопровождения</td><td>вкл.</td><td>вкл.</td><td>вкл.</td></tr>
 
-          <tr class="sub"><td>Итого</td><td>₽80 000</td><td>₽130 000</td><td>₽195 000</td></tr>
-          <tr class="tot"><td>Срок</td><td>4 нед.</td><td>7 нед.</td><td>12 нед.</td></tr>
+          <tr class="sub"><td>Итого</td><td>₽150 000</td><td>₽240 000</td><td>₽390 000</td></tr>
+          <tr class="tot"><td>Срок</td><td>7 р.дн.</td><td>12 р.дн.</td><td>20 р.дн.</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- ── ROADMAP ── -->
-  <section class="sec fade-up d4">
+  <!-- ── SUPPORT ── -->
+  <section class="sec fu d5">
     <div class="sec-label">
-      <span class="sec-num">03</span>
-      <h2 class="sec-title">После запуска — roadmap</h2>
+      <span class="sec-num">07</span>
+      <h2 class="sec-title">Сопровождение</h2>
     </div>
+    <p style="font-size:14px;color:var(--graphite);line-height:1.65;max-width:580px;margin-bottom:24px;">Сайт — не файл, который мы отдаём. Это система, которую мы вам запускаем. Три тарифа под разные задачи.</p>
 
-    <p style="font-size:14px;color:var(--graphite);line-height:1.65;max-width:560px;margin-bottom:24px;">
-      Дальнейшие шаги зависят от данных. Три месяца наблюдения — три возможных развилки.
-    </p>
-
-    <div class="roadmap">
-      <div class="rm">
-        <div class="rm-head">
-          <div>
-            <div class="rm-phase-lbl">Фаза 0</div>
-            <div class="rm-title">Запуск и наблюдение</div>
-          </div>
-          <div class="rm-period">Месяц 1–3</div>
+    <div class="support-grid">
+      <div class="support-card">
+        <div class="support-head">
+          <div class="support-tier">Базовый</div>
+          <div class="support-name">Старт</div>
+          <div class="support-price">₽18 000<span class="support-price-note">/мес</span></div>
         </div>
-        <div class="rm-body">
-          <p class="rm-desc">Сайт работает. Собираются данные: заявки в неделю, конверсия, источники трафика. Никаких решений по допам до появления реальных цифр.</p>
-          <div class="rm-base">
-            <span class="rm-base-lbl">Фоновое</span>
-            <span>Техподдержка ₽10 000/мес — обновление цен, мониторинг, мелкие правки. При любом сценарии.</span>
-          </div>
+        <div class="support-body">
+          <ul class="support-list">
+            <li>Мониторинг доступности, скорости, SSL</li>
+            <li>Бэкапы, обновления CMS</li>
+            <li>Обновление цен и остатков через CSV</li>
+            <li>До 2 часов правок в месяц</li>
+            <li>Краткий ежемесячный отчёт</li>
+          </ul>
+          <div class="support-limit">Без SEO, аналитики и созвонов.</div>
+          <div class="support-for"><b>Кому:</b> PKG-01, бюджет ограничен, нужна базовая страховка.</div>
         </div>
       </div>
 
-      <div class="rm">
-        <div class="rm-head">
-          <div>
-            <div class="rm-phase-lbl">Фаза 1</div>
-            <div class="rm-title">Развилки по данным</div>
-          </div>
-          <div class="rm-period">Месяц 3–6</div>
+      <div class="support-card feat-support">
+        <div class="support-head">
+          <div class="support-tier">Рекомендуем <span class="feat-pill">★</span></div>
+          <div class="support-name">Рост</div>
+          <div class="support-price">₽32 000<span class="support-price-note">/мес</span></div>
         </div>
-        <div class="rm-body">
-          <p class="rm-desc">По результатам наблюдения — одна из трёх веток. Решение по метрикам, не ощущениям.</p>
-          <div class="forks">
-            <div class="fork">
-              <div class="fork-head"><div class="fork-dot amber"></div><span class="fork-lbl">Развилка A</span></div>
-              <div class="fork-trigger">Лидов меньше целевого</div>
-              <div class="fork-action">Органики недостаточно. Яндекс.Директ с гео-таргетингом по 5 направлениям, сегментация B2C/B2B.</div>
-              <div class="fork-cost">₽25 000 настройка<br>+ ₽15 000/мес</div>
-            </div>
-            <div class="fork">
-              <div class="fork-head"><div class="fork-dot blue"></div><span class="fork-lbl">Развилка B</span></div>
-              <div class="fork-trigger">Трафик есть, конверсия низкая</div>
-              <div class="fork-action">Пользователи приходят, не доверяют. SEO-сопровождение + контент объектов с геолокацией.</div>
-              <div class="fork-cost">₽18 000/мес SEO<br>+ ₽800/объект</div>
-            </div>
-            <div class="fork">
-              <div class="fork-head"><div class="fork-dot green"></div><span class="fork-lbl">Развилка C</span></div>
-              <div class="fork-trigger">Подрядчики возвращаются</div>
-              <div class="fork-action">Валидация подтвердилась — масштабируется инфраструктура. Апгрейд до пакета 03 или новые бренды.</div>
-              <div class="fork-cost">Апгрейд PKG-03<br>или ₽12 000/бренд</div>
-            </div>
-          </div>
+        <div class="support-body">
+          <ul class="support-list">
+            <li>Всё из тарифа «Старт»</li>
+            <li>До 4 часов правок в месяц</li>
+            <li>2 новых объекта в портфолио / мес</li>
+            <li>SEO-поддержка (ссылки, оптимизация)</li>
+            <li>Отчёт с метриками: трафик, заявки, конверсия</li>
+            <li>Созвон 30 мин. ежемесячно</li>
+            <li>1 проактивная гипотеза на следующий месяц</li>
+          </ul>
+          <div class="support-for"><b>Кому:</b> PKG-02, органический рост.</div>
+        </div>
+      </div>
+
+      <div class="support-card">
+        <div class="support-head">
+          <div class="support-tier">Максимальный</div>
+          <div class="support-name">Полный</div>
+          <div class="support-price">₽58 000<span class="support-price-note">/мес</span></div>
+        </div>
+        <div class="support-body">
+          <ul class="support-list">
+            <li>Всё из тарифа «Рост»</li>
+            <li>Ведение Яндекс.Директ (до 2 кампаний)</li>
+            <li>A/B-тест 1 гипотезы в квартал</li>
+            <li>Стратегический созвон раз в квартал</li>
+          </ul>
+          <div class="support-limit">Рекламный бюджет — отдельно на клиенте.</div>
+          <div class="support-for"><b>Кому:</b> PKG-02 или PKG-03, активный B2B-рост.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="support-anchor">
+      <strong>Первый месяц сопровождения в тарифе «Рост» включён в стоимость разработки.</strong> Сайт в первые 3 месяца — это гипотеза. Мы встраиваем первый месяц наблюдения в договор на разработку, чтобы старт был под контролем. После — решаете сами.
+    </div>
+  </section>
+
+  <!-- ── ADDONS ── -->
+  <section class="sec fu d5">
+    <div class="sec-label">
+      <span class="sec-num">08</span>
+      <h2 class="sec-title">Дополнительные услуги</h2>
+    </div>
+    <div class="addons-grid">
+      <div class="addon">
+        <div>
+          <div class="addon-name">Яндекс.Директ — настройка</div>
+          <div class="addon-desc">Стратегия + кампании B2C/B2B + гео-таргетинг по 5 направлениям. Под ключ.</div>
+        </div>
+        <div>
+          <div class="addon-price">₽40 000</div>
+          <div class="addon-note">разово</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">Яндекс.Директ — ведение</div>
+          <div class="addon-desc">Оптимизация ставок, A/B-тексты объявлений, ежемесячная отчётность.</div>
+        </div>
+        <div>
+          <div class="addon-price">₽22 000</div>
+          <div class="addon-note">/мес</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">SEO-сопровождение</div>
+          <div class="addon-desc">Семантика, новые гео-страницы, информационные статьи, ссылочный профиль, отчёт.</div>
+        </div>
+        <div>
+          <div class="addon-price">₽32 000</div>
+          <div class="addon-note">/мес</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">Контент одного объекта</div>
+          <div class="addon-desc">Текст + геолокация + SEO-оформление одного реализованного проекта.</div>
+        </div>
+        <div>
+          <div class="addon-price">₽800</div>
+          <div class="addon-note">/объект</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">Новый бренд / категория</div>
+          <div class="addon-desc">Карточки, фильтры, SEO-страница при наличии материалов от клиента.</div>
+        </div>
+        <div>
+          <div class="addon-price">₽15 000</div>
+          <div class="addon-note">/бренд</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">Доп. гео-страница сверх пакета</div>
+          <div class="addon-desc">Посёлок, коттеджный район, конкретное шоссе — SEO + уникальный текст.</div>
+        </div>
+        <div>
+          <div class="addon-price">₽2 000</div>
+          <div class="addon-note">/стр.</div>
+        </div>
+      </div>
+      <div class="addon">
+        <div>
+          <div class="addon-name">Фотосъёмка объектов</div>
+          <div class="addon-desc">Выезд, съёмка реализованных объектов для портфолио с геолокацией.</div>
+        </div>
+        <div>
+          <div class="addon-price">от ₽15 000</div>
+          <div class="addon-note">за выезд</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── TERMS ── -->
-  <section class="sec fade-up d5">
+  <!-- ── BUDGET 12M ── -->
+  <section class="sec fu d5">
     <div class="sec-label">
-      <span class="sec-num">04</span>
+      <span class="sec-num">09</span>
+      <h2 class="sec-title">Бюджет на 12 месяцев</h2>
+    </div>
+    <p style="font-size:14px;color:var(--graphite);line-height:1.65;max-width:580px;margin-bottom:24px;">Разработка сайта — разовая инвестиция. Цифровой канал — система, которая работает каждый месяц. Три сценария, чтобы принимать решение по полному контуру, а не только по первому платежу.</p>
+    <div class="budget-grid">
+      <div class="budget-card">
+        <div class="budget-scenario">Сценарий 1</div>
+        <div class="budget-name">Минимальный<br><span style="font-size:13px;font-weight:500;color:var(--graphite);">PKG-01 + Старт</span></div>
+        <div class="budget-rows">
+          <div class="budget-row"><span class="budget-row-label">Разработка PKG-01</span><span class="budget-row-val">₽150 000</span></div>
+          <div class="budget-row"><span class="budget-row-label">Сопровождение «Старт» × 11 мес</span><span class="budget-row-val">₽198 000</span></div>
+        </div>
+        <hr class="budget-divider">
+        <div class="budget-total">
+          <span class="budget-total-label">За год</span>
+          <span class="budget-total-val">₽348 000</span>
+        </div>
+        <div class="budget-who">Для тех, кто хочет закрыть минимум и посмотреть на результат.</div>
+      </div>
+
+      <div class="budget-card hi">
+        <div class="budget-scenario">Сценарий 2 <span class="feat-pill">★ рекомендуем</span></div>
+        <div class="budget-name">Базовый<br><span style="font-size:13px;font-weight:500;color:var(--graphite);">PKG-02 + Рост + SEO</span></div>
+        <div class="budget-rows">
+          <div class="budget-row"><span class="budget-row-label">Разработка PKG-02</span><span class="budget-row-val">₽240 000</span></div>
+          <div class="budget-row"><span class="budget-row-label">Сопровождение «Рост» × 11 мес</span><span class="budget-row-val">₽352 000</span></div>
+          <div class="budget-row"><span class="budget-row-label">SEO × 11 мес</span><span class="budget-row-val">₽352 000</span></div>
+        </div>
+        <hr class="budget-divider">
+        <div class="budget-total">
+          <span class="budget-total-label">За год</span>
+          <span class="budget-total-val">₽944 000</span>
+        </div>
+        <div class="budget-who">Органический рост + видимая работа каждый месяц в цифрах.</div>
+      </div>
+
+      <div class="budget-card">
+        <div class="budget-scenario">Сценарий 3</div>
+        <div class="budget-name">Развитийный<br><span style="font-size:13px;font-weight:500;color:var(--graphite);">PKG-02 + Полный + Директ</span></div>
+        <div class="budget-rows">
+          <div class="budget-row"><span class="budget-row-label">Разработка PKG-02</span><span class="budget-row-val">₽240 000</span></div>
+          <div class="budget-row"><span class="budget-row-label">Сопровождение «Полный» × 11 мес</span><span class="budget-row-val">₽638 000</span></div>
+          <div class="budget-row"><span class="budget-row-label">Настройка Яндекс.Директ</span><span class="budget-row-val">₽40 000</span></div>
+        </div>
+        <hr class="budget-divider">
+        <div class="budget-total">
+          <span class="budget-total-label">За год</span>
+          <span class="budget-total-val">₽918 000</span>
+        </div>
+        <div class="budget-who">Активный B2B-захват. Рекламный бюджет — отдельно.</div>
+      </div>
+    </div>
+    <div class="budget-note">Первый месяц сопровождения включён в стоимость разработки. В таблице указаны 11 оплачиваемых месяцев — первый входит в пакет.</div>
+  </section>
+
+  <!-- ── TERMS ── -->
+  <section class="sec fu d5">
+    <div class="sec-label">
+      <span class="sec-num">10</span>
       <h2 class="sec-title">Условия работы</h2>
     </div>
     <div class="terms">
@@ -1199,16 +1130,16 @@ table.smeta {
           <li>2 раунда правок включены в каждый пакет</li>
           <li>Каждый раунд — до 5 правок</li>
           <li>Дополнительный раунд — ₽2 000</li>
-          <li>Приёмка по чеклисту из ТЗ</li>
+          <li>Приёмка по чеклисту из 67 пунктов</li>
         </ul>
       </div>
       <div class="term">
         <div class="term-title">Сроки</div>
         <ul class="term-list">
-          <li>Отсчёт с момента предоплаты</li>
-          <li>Срок не включает ожидание материалов</li>
-          <li>Задержка 3+ дней — сдвиг сроков</li>
-          <li>Еженедельный отчёт о прогрессе</li>
+          <li>Отсчёт с момента получения предоплаты</li>
+          <li>Задержка материалов от клиента 2+ р.д. — сроки сдвигаются пропорционально</li>
+          <li>Отчёт каждую пятницу</li>
+          <li class="accent-li">Неустойка за срыв срока со стороны исполнителя — 1% от стоимости пакета за каждый рабочий день</li>
         </ul>
       </div>
       <div class="term">
@@ -1216,16 +1147,16 @@ table.smeta {
         <ul class="term-list">
           <li>30 дней гарантийной поддержки</li>
           <li>Figma + репозиторий + README</li>
-          <li>Обучение Admin-панели (пакет 03)</li>
+          <li>Первый месяц сопровождения «Рост» включён в стоимость</li>
         </ul>
       </div>
     </div>
   </section>
 
   <!-- ── PROVIDES ── -->
-  <section class="sec fade-up d5">
+  <section class="sec fu d6">
     <div class="sec-label">
-      <span class="sec-num">05</span>
+      <span class="sec-num">11</span>
       <h2 class="sec-title">Что нужно от вас к старту</h2>
     </div>
     <div class="provides">
@@ -1235,17 +1166,17 @@ table.smeta {
       <div class="provide">Логотип и фирменный стиль</div>
       <div class="provide">Условия доставки по направлениям</div>
       <div class="provide">Фото команды (при наличии)</div>
-      <div class="provide">Фото объектов (пакет 02/03)</div>
+      <div class="provide">Фото объектов (PKG-02/03)</div>
       <div class="provide">Доступ к домену и хостингу</div>
       <div class="provide">Контакты и режим работы</div>
     </div>
   </section>
 
   <!-- ── CTA ── -->
-  <div class="cta fade-up d5">
+  <div class="cta fu d6">
     <div>
-      <div class="cta-title">Следующий шаг — 15 минут</div>
-      <div class="cta-body">Три открытых вопроса: цены в карточках, статус новых брендов, выбор пакета. После созвона — договор и старт в течение 48 часов.</div>
+      <div class="cta-title">15 минут — три вопроса — договор за 48 часов</div>
+      <div class="cta-body">Уточняем ваш оборот для расчёта окупаемости, выбираем пакет, согласуем старт. Подписываем договор с неустойкой за срок — и начинаем.</div>
     </div>
     <div class="cta-btns">
       <a href="#" class="btn btn-white">Выбрать пакет →</a>
@@ -1255,7 +1186,7 @@ table.smeta {
 
   <footer class="doc-footer">
     <span>KULBATSKII OS · SOP v1.2 · KP-2026-001 v2.0</span>
-    <span>Действителен 14 дней · 20.04.2026</span>
+    <span>Действителен 14 дней · 21.04.2026</span>
   </footer>
 
 </div>
